@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b4df6be3-66bd-4eaa-934f-f16dc2850daa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_java_hamcrest_2_0_0_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/simulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/simulator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/SimulatorApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/SimulatorApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/generators/RandomMessageGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/generators/RandomMessageGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messaging/messengers/CommandLineMessenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messaging/messengers/CommandLineMessenger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/models/CameraMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/models/CameraMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/SimulatorApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/SimulatorApplicationTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="b4df6be3-66bd-4eaa-934f-f16dc2850daa" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/simulator/.gradle/" />
     <ignored path="$PROJECT_DIR$/simulator/build/" />
     <ignored path="$PROJECT_DIR$/simulator/out/" />
@@ -164,8 +153,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/SimulatorApplicationTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="88" lean-forward="true" selection-start-line="33" selection-start-column="88" selection-end-line="33" selection-end-column="88" />
+            <state relative-caret-position="578">
+              <caret line="34" column="71" selection-start-line="34" selection-start-column="70" selection-end-line="34" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -969,6 +958,7 @@
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <flattenPackages ProjectPane="false" />
+      <showMembers ProjectPane="false" />
       <hideEmptyPackages ProjectPane="true" />
       <abbreviatePackageNames ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
@@ -1032,30 +1022,10 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="camera_herhaling" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simulator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="camera_herhaling" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simulator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="camera_herhaling" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simulator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="simulator" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
+        <option name="show-excluded-files" value="false" />
       </pane>
       <pane id="Scope" />
       <pane id="PackagesPane" />
@@ -1069,14 +1039,14 @@
     <property name="SearchEverywhereHistoryKey" value="CachingConnectionFactory&#9;PSI&#9;JAVA://org.springframework.amqp.rabbit.connection.CachingConnectionFactory" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537652610147" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537654663689" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="jdk.selected.JAVA_MODULE" value="10" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -1258,7 +1228,7 @@
       <workItem from="1537530428506" duration="7916000" />
       <workItem from="1537544987926" duration="24000" />
       <workItem from="1537624565633" duration="405000" />
-      <workItem from="1537632426120" duration="17962000" />
+      <workItem from="1537632426120" duration="19269000" />
     </task>
     <servers />
   </component>
@@ -1295,7 +1265,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27802000" />
+    <option name="totallyTimeSpent" value="29109000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1308,7 +1278,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="25" width="2505" height="1415" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49825785" visible="true" weight="0.15778773" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1320,14 +1289,14 @@
       <window_info id="Web" order="7" sideWeight="0.5017422" side_tool="true" weight="0.15778773" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3291829" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3291829" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3299611" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.33522084" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.3299611" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3299611" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3299611" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3291829" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.3299611" />
@@ -1578,8 +1547,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/SimulatorApplicationTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="88" lean-forward="true" selection-start-line="33" selection-start-column="88" selection-end-line="33" selection-end-column="88" />
+        <state relative-caret-position="578">
+          <caret line="34" column="71" selection-start-line="34" selection-start-column="70" selection-end-line="34" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
