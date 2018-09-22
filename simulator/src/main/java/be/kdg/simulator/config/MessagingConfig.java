@@ -11,10 +11,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 @EnableScheduling
 public class MessagingConfig {
 
-    @Bean("flappeke")
-    @ConditionalOnProperty(name = "generator.type", havingValue = "file")
-    public FileMessageGenerator Filegenerator() {
-        return new FileMessageGenerator();
-    }
+//    @Bean("")
+//    @ConditionalOnProperty(name = "generator.type", havingValue = "file")
+//    public FileMessageGenerator Filegenerator() {
+//        return new FileMessageGenerator();
+//    }
 
 }

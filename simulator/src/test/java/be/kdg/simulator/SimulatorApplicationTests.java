@@ -1,7 +1,7 @@
 package be.kdg.simulator;
 
 import be.kdg.simulator.generators.MessageGenerator;
-import be.kdg.simulator.messaging.CameraMessage;
+import be.kdg.simulator.models.CameraMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

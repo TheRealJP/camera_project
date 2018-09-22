@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // dit is ook gewoon een bean
 @SpringBootApplication
 public class SimulatorApplication {
-//
 //    @Autowired // field injection zorgt ervoor dat we cyclical dependencies kunnen vermijden indien dit voorkomt
 //    private MessageGenerator generator;
 //
