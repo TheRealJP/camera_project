@@ -8,11 +8,13 @@ import java.time.LocalDateTime;
 
 @Component //maakt van RandomMessageGenerator een bean
 /*name = verzonnen --> check bij application.properties file*/
-@ConditionalOnProperty(name = "generator.type", havingValue = "random")
+@ConditionalOnProperty(name = "generator.type", havingValue = "random") // this annotation adds this bean to spring container
 public class RandomMessageGenerator implements MessageGenerator {
 
     @Override
     public CameraMessage generateCameraMessage() {
         return new CameraMessage(1, LocalDateTime.now(), "1-ABC-123");
     }
+
+
 }

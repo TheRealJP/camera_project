@@ -38,4 +38,17 @@ public class CameraMessage {
                 ", licensePlate='" + licensePlate + '\'' +
                 '}';
     }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
 }

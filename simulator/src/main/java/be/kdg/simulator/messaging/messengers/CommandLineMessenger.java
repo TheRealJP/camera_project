@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandLineMessenger implements Messenger {
     private final MessageGenerator messageGenerator;
-    private static final Logger log = LoggerFactory.getLogger(CommandLineMessenger.class);
+    private final Logger log = LoggerFactory.getLogger(CommandLineMessenger.class);
 
     @Override
     @Schedules(value = {@Scheduled(fixedDelayString = "#{${base.frequency}}") /*default delay*/,
