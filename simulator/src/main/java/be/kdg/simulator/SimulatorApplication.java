@@ -3,11 +3,13 @@ package be.kdg.simulator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
-// container wordt hier gebouwd bij run?
-// dit is ook gewoon een bean
+// container wordt hier gebouwd bij run()
+// deze klasse is ook gewoon een bean
 @SpringBootApplication
+@EnableScheduling //moved this here from config class
 public class SimulatorApplication {
 
 //    @Autowired // field injection zorgt ervoor dat we cyclical dependencies kunnen vermijden indien dit voorkomt
