@@ -6,6 +6,7 @@ import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Schedules;
@@ -29,7 +30,6 @@ public class QueueMessenger implements Messenger {
     /**
      * stuurt messages naar de Queue op basis van schedules
      * chron stuurt rate
-     *
      */
 
     @Override
@@ -38,7 +38,11 @@ public class QueueMessenger implements Messenger {
             @Scheduled(cron = "${evening.rush}")})
     public void sendMessage() {
         try {
-            CameraMessage message = messageGenerator.generateCameraMessage();
+            if (@Qualifier(value = ) "generator.type".equals("file")){
+
+            }
+
+                CameraMessage message = messageGenerator.generateCameraMessage();
             template.convertAndSend(queue.getName(), message.toString().getBytes());
             System.out.println("[x] sent: " + message);
         } catch (AmqpException e) {

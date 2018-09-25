@@ -9,12 +9,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 
-//@Profile({"cameraQueue","cameraProject"})
 @Configuration
 public class QueueConfig {
 
     @Bean
-    public Queue hello(){
+    public Queue queue() {
         return new Queue("camera-queue");
     }
 
@@ -28,8 +27,6 @@ public class QueueConfig {
 //    public QueueMessenger queueMessenger (){
 //        return new QueueMessenger();
 //    }
-
-
 
 
 }

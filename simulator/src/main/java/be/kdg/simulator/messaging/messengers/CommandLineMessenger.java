@@ -22,11 +22,10 @@ public class CommandLineMessenger implements Messenger {
 
     @Override
     @Schedules({@Scheduled(fixedDelayString = "#{${base.frequency}}"),
-                @Scheduled(cron = "${morning.rush}"),
-                @Scheduled(cron = "${evening.rush}")})
+            @Scheduled(cron = "${morning.rush}"),
+            @Scheduled(cron = "${evening.rush}")})
     public void sendMessage() {
-        System.out.println(messageGenerator.generateCameraMessage());
-//        log.warn("{}",messageGenerator.generateCameraMessage() );
+        log.info("{}", messageGenerator.generateCameraMessage());
     }
 
 
