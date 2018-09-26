@@ -4,4 +4,5 @@ import be.kdg.simulator.models.CameraMessage;
 
 public interface MessageGenerator {
     CameraMessage generateCameraMessage();
+//    CameraMessage generateCameraMessage(int cameraId, String licenseplate);
 }

@@ -6,6 +6,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Schedules;
@@ -31,10 +32,14 @@ public class QueueMessenger implements Messenger {
     @Schedules({@Scheduled(fixedDelayString = "#{${base.frequency}}"),
             @Scheduled(cron = "${morning.rush}"),
             @Scheduled(cron = "${evening.rush}")})
+
     public void sendMessage() {
-        //TODO: message doorsturen naar Queue
+        //getting messages from arraylist to this place and loop trough? conditionalonproperty file/random?
+
         String message = messageGenerator.generateCameraMessage().toString();
         template.convertAndSend("camera-queue", message);
 //        System.out.println(messageGenerator.generateCameraMessage());
     }
+
+
 }
