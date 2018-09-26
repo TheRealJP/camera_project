@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.util.ArrayList;
 
 @Configuration
-//@EnableScheduling
 public class MessagingConfig {
 
     @Bean
@@ -24,12 +23,4 @@ public class MessagingConfig {
     public ArrayList<CameraMessage> cameraMessages() {
         return new ArrayList<>();
     }
-
-
-//    @Bean("")
-//    @ConditionalOnProperty(name = "generator.type", havingValue = "file")
-//    public FileMessageGenerator Filegenerator() {
-//        return new FileMessageGenerator();
-//    }
-
 }

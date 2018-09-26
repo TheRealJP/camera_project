@@ -1,9 +1,12 @@
 package be.kdg.simulator.generators;
 
 import be.kdg.simulator.models.CameraMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -14,49 +17,39 @@ import java.util.ArrayList;
 @ConditionalOnProperty(name = "generator.type", havingValue = "file")
 public class FileMessageGenerator implements MessageGenerator {
 
-    private ResourceLoader resourceLoader;
-    private ArrayList<String[]> fileLines;
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileMessageGenerator.class);
+    private final ResourceLoader resourceLoader;
     private final ArrayList<CameraMessage> cameraMessages;
+    private int fileLineCounter = 0;
 
     public FileMessageGenerator(ResourceLoader resourceLoader, ArrayList<CameraMessage> cameraMessages) {
         this.resourceLoader = resourceLoader;
         this.cameraMessages = cameraMessages;
-        fileLines = new ArrayList<>();
         collectMessages();
-
     }
 
     @Override
     public CameraMessage generateCameraMessage() {
-        //loopen list adhv size, 1 voor 1 naar Q sturen
-        //
-        return new CameraMessage(2, LocalDateTime.now(), "1-XYZ-987");
+        if (cameraMessages.size() <= fileLineCounter) return null; //null value will be used to stop service?
+        System.out.println(fileLineCounter);
+        return cameraMessages.get(fileLineCounter++);
     }
 
-    //TODO: read txt and convert to message objects
-
-    //    @Bean
-    // file -->
-//    public ArrayList<String[]> collectMessages() {
     private void collectMessages() {
         Resource resource = resourceLoader.getResource("files/camera_messages.txt");
-        fileLines = new ArrayList<>();
-
         try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))) {
             String line = "";
             while ((line = br.readLine()) != null) {
                 String[] split = line.split(",");
-                fileLines.add(split);
 
-                Thread.sleep(Integer.parseInt(split[2]));
+                System.out.println("printing");
+                Thread.sleep(/*Long.parseLong(split[2].trim())*/0); //duurt lang // delay
                 cameraMessages.add(new CameraMessage(Integer.parseInt(split[0]), LocalDateTime.now(), split[1]));
             }
         } catch (IOException e) {
-            //TODO: add logger
-            e.printStackTrace();
+            LOGGER.error("IOException occurred", e);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.error("current thread has been interrupted", e);
         }
-//        return fileLines;
     }
 }
