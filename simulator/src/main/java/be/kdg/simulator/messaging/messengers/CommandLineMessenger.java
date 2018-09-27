@@ -29,12 +29,12 @@ public class CommandLineMessenger implements Messenger {
      * 1. zorgen voor een hele lange delay, 1 methode (-)
      * 2. sendmessage delegeren, nieuwe methodes van eigen scheduling voorzien (+)
      */
-    @Bean
+    @PostConstruct // anders error: beans met void niet toegelaten
     @Schedules({@Scheduled(fixedDelayString = "#{${base.frequency}}"),
             @Scheduled(cron = "${morning.rush}"),
             @Scheduled(cron = "${evening.rush}")})
     @ConditionalOnProperty(name = "generator.type", havingValue = "random")
-    public void sendRandomMessages() { //deze heeft geen postconstruct nodig ipv bean?
+    public void sendRandomMessages() {
         sendMessage();
     }
 
@@ -47,10 +47,11 @@ public class CommandLineMessenger implements Messenger {
 
     @Override
     public void sendMessage() {
-        String message = messageGenerator.generateCameraMessage().toString();
-        if (!message.isEmpty() && message != null) {
-            log.info(message);
-        }
+        CameraMessage message = messageGenerator.generateCameraMessage();
+        if (message == null)
+            System.exit(0);
+        log.info(message.toString());
+
     }
 
 

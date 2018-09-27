@@ -24,23 +24,24 @@ public class RandomMessageGenerator implements MessageGenerator {
     private ArrayList<String> licensePlates;
     private Random r;
 
-
     public RandomMessageGenerator() {
         this.licensePlates = new ArrayList<>();
         this.r = new Random();
         fillLicensePlateCollection();
     }
 
+    /**
+     * ISSUES
+     * 1) kleine pool van licenseplates, kans op registratie door 2 verschillende cameras
+     * op 2 dezelfde tijdstippen van dezelfde nummerplaat
+     * gevolg: bij boeteberekening --> bv: auto met nummerplaat rijd dan 500km/uur in de bebouwde kom
+     * licensePlates.get(r.nextInt(licensePlates.size())));
+     * 2) 2^6 aantal platen, weinig kans op een snelheidsberekening
+     */
     @Override
     public CameraMessage generateCameraMessage() {
-        /*2^6 aantal platen, weinig kans op een snelheidsberekening*/
         return new CameraMessage(r.nextInt(maxId) + 1,
                 LocalDateTime.now(), randomLicensePlateGenerator());
-
-                /* kleine pool van licenseplates, kans op registratie door 2 verschillende cameras
-                op 2 dezelfde tijdstippen van dezelfde nummerplaat
-                gevolg: bij boeteberekening --> bv: auto met nummerplaat rijd dan 500km/uur in de bebouwde kom */
-                // licensePlates.get(r.nextInt(licensePlates.size())));
     }
 
     private String randomLicensePlateGenerator() {

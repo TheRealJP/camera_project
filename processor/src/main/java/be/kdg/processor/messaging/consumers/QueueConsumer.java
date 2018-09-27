@@ -1,4 +1,4 @@
-package be.kdg.simulator.messaging.messengers;
+package be.kdg.processor.messaging.consumers;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

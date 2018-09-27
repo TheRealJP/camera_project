@@ -33,12 +33,10 @@ public class CameraMessage {
 
     @Override
     public String toString() {
-        return "CameraMessage{" +
-                "cameraId=" + id +
-                " | date=" + dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
-                " | time=" + dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) +
-                " | licensePlate='" + licensePlate + '\'' +
-                '}';
+        return String.format("cameraId %2d | %s | %s | %s", id,
+                dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS")),
+                licensePlate);
     }
 
     public int getId() {

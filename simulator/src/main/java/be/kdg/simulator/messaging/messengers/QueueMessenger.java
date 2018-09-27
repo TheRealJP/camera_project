@@ -1,6 +1,7 @@
 package be.kdg.simulator.messaging.messengers;
 
 import be.kdg.simulator.generators.MessageGenerator;
+import be.kdg.simulator.models.CameraMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Queue;
@@ -53,10 +54,10 @@ public class QueueMessenger implements Messenger {
 
     @Override
     public void sendMessage() {
-        String message = messageGenerator.generateCameraMessage().toString();
-        if (!message.isEmpty()) {
-//            template.convertAndSend("camera-queue", message);
-            log.info(message);
-        }
+        CameraMessage message = messageGenerator.generateCameraMessage();
+        if (message == null)
+            System.exit(0);
+        log.info(message.toString());
+        template.convertAndSend("camera-queue", message.toString());
     }
 }

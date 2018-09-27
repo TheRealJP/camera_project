@@ -31,21 +31,21 @@ public class FileMessageGenerator implements MessageGenerator {
     @Override
     public CameraMessage generateCameraMessage() {
         if (cameraMessages.size() <= fileLineCounter) return null; //null value will be used to stop service?
-        System.out.println(fileLineCounter);
         return cameraMessages.get(fileLineCounter++);
     }
 
     private void collectMessages() {
-        Resource resource = resourceLoader.getResource("files/camera_messages.txt");
+        Resource resource = resourceLoader.getResource("files/camera_messages.txt"); //${file.path} werkt niet
         try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))) {
+
             String line = "";
             while ((line = br.readLine()) != null) {
                 String[] split = line.split(",");
-
-                System.out.println("printing");
-                Thread.sleep(/*Long.parseLong(split[2].trim())*/0); //duurt lang // delay
+                LOGGER.info("transforming file to cameramessages: delay between next message {}", split[2].trim());
+                Thread.sleep(Long.parseLong(split[2].trim())); //duurt lang //delay //andere thread?? //meer rijen, nog langer wachten
                 cameraMessages.add(new CameraMessage(Integer.parseInt(split[0]), LocalDateTime.now(), split[1]));
             }
+
         } catch (IOException e) {
             LOGGER.error("IOException occurred", e);
         } catch (InterruptedException e) {
