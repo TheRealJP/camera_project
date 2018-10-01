@@ -32,25 +32,25 @@ public class QueueMessenger implements Messenger {
         this.queue = queue;
     }
 
-    /**
-     * #  Doel: scheduling op default laten draaien als filemode aan staat
-     * 1. zorgen voor een hele lange delay, 1 methode (-)
-     * 2. sendmessage delegeren, nieuwe methodes van eigen scheduling voorzien (+)
-     */
-    @Bean
-    @Schedules({@Scheduled(fixedDelayString = "#{${base.frequency}}"),
-            @Scheduled(cron = "${morning.rush}"),
-            @Scheduled(cron = "${evening.rush}")})
-    @ConditionalOnProperty(name = "generator.type", havingValue = "random")
-    public void sendRandomMessages() {
-        sendMessage();
-    }
-
-    @Scheduled(fixedDelay = 1000L)
-    @ConditionalOnProperty(name = "generator.type", havingValue = "file")
-    public void sendFileMessages() {
-        sendMessage();
-    }
+//    /**
+//     * #  Doel: scheduling op default laten draaien als filemode aan staat
+//     * 1. zorgen voor een hele lange delay, 1 methode (-)
+//     * 2. sendmessage delegeren, nieuwe methodes van eigen scheduling voorzien (+)
+//     */
+//    @Bean
+//    @Schedules({@Scheduled(fixedDelayString = "#{${base.frequency}}"),
+//            @Scheduled(cron = "${morning.rush}"),
+//            @Scheduled(cron = "${evening.rush}")})
+//    @ConditionalOnProperty(name = "generator.type", havingValue = "random")
+//    public void sendRandomMessages() {
+//        sendMessage();
+//    }
+//
+//    @Scheduled(fixedDelay = 1000L)
+//    @ConditionalOnProperty(name = "generator.type", havingValue = "file")
+//    public void sendFileMessages() {
+//        sendMessage();
+//    }
 
     @Override
     public void sendMessage() {
