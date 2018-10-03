@@ -6,18 +6,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 
 @Component
 @ConditionalOnProperty(name = "generator.type", havingValue = "file")
 public class FileMessageGenerator implements MessageGenerator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileMessageGenerator.class);
+    private static final Logger log = LoggerFactory.getLogger(FileMessageGenerator.class);
     private final ResourceLoader resourceLoader;
     private final ArrayList<CameraMessage> cameraMessages;
     private int fileLineCounter = 0;
@@ -41,15 +43,15 @@ public class FileMessageGenerator implements MessageGenerator {
             String line = "";
             while ((line = br.readLine()) != null) {
                 String[] split = line.split(",");
-                LOGGER.info("transforming file to cameramessages: delay between next message {}", split[2].trim());
-                Thread.sleep(Long.parseLong(split[2].trim())); //duurt lang //delay //andere thread?? //meer rijen, nog langer wachten
-                cameraMessages.add(new CameraMessage(Integer.parseInt(split[0]), LocalDateTime.now(), split[1]));
+                log.info("transforming file to cameramessages: delay between next message {}", split[2].trim());
+//                Thread.sleep(Long.parseLong(split[2].trim())); //duurt lang //delay //andere thread?? //meer rijen, nog langer wachten
+                long delay = Long.parseLong(split[2].trim()); //duurt lang //delay //andere thread?? //meer rijen, nog langer wachten
+                cameraMessages.add(new CameraMessage(Integer.parseInt(split[0]),
+                        LocalDateTime.now().plus(delay, ChronoField.MILLI_OF_DAY.getBaseUnit()),
+                        split[1]));
             }
-
         } catch (IOException e) {
-            LOGGER.error("IOException occurred", e);
-        } catch (InterruptedException e) {
-            LOGGER.error("current thread has been interrupted", e);
+            log.error("IOException occurred", e);
         }
     }
 }

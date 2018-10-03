@@ -11,15 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 public class SimulatorApplication {
-
-//    @Autowired // field injection zorgt ervoor dat we cyclical dependencies kunnen vermijden indien dit voorkomt
-//    private MessageGenerator generator;
-
-//    /*@Component boven een afgeleide van deze interface zorgt ervoor dat deze kan geinject worden in deze constructor*/
-//    public SimulatorApplication(MessageGenerator messageGenerator) {
-//        this.generator = messageGenerator;
-//    }
-
     public static void main(String[] args) {
         SpringApplication.run(SimulatorApplication.class, args);
     }

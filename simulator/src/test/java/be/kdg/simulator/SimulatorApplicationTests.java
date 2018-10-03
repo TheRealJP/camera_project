@@ -31,7 +31,7 @@ public class SimulatorApplicationTests {
 
         assertThat(cameraMessage.getLicensePlate(), Matchers.matchesPattern("^1-\\w{3}-\\d{3}$"));
         assertThat(cameraMessage, Matchers.notNullValue());
-        isInstanceOf(LocalDateTime.class,cameraMessage.getDateTime(),"Its not a date!");
-        isInstanceOf(Integer.class,cameraMessage.getId(),"Its not a number!");
+        isInstanceOf(LocalDateTime.class, cameraMessage.getDateTime(), "Its not a date!");
+        isInstanceOf(Integer.class, cameraMessage.getId(), "Its not a number!");
     }
 }

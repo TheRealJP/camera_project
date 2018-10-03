@@ -1,16 +1,14 @@
 package be.kdg.simulator.generators;
 
 import be.kdg.simulator.models.CameraMessage;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Random;
 
 @Component //maakt van RandomMessageGenerator een bean
@@ -19,10 +17,12 @@ import java.util.Random;
 // this annotation adds this bean to spring container
 public class RandomMessageGenerator implements MessageGenerator {
 
+    private static final Logger log = LoggerFactory.getLogger(RandomMessageGenerator.class);
     @Value("#{${camera.amount}}")
     private int maxId;
     private ArrayList<String> licensePlates;
     private Random r;
+
 
     public RandomMessageGenerator() {
         this.licensePlates = new ArrayList<>();
@@ -59,6 +59,8 @@ public class RandomMessageGenerator implements MessageGenerator {
     }
 
     private void fillLicensePlateCollection() {
+        log.info("collecting licenseplates...");
+
         for (int i = 0; i < 10; i++)
             licensePlates.add(randomLicensePlateGenerator());
     }
