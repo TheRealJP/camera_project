@@ -1,24 +1,22 @@
 package be.kdg.simulator.messaging.messengers;
 
-import be.kdg.simulator.generators.MessageGenerator;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import be.kdg.sa.services.CameraServiceProxy;
+import be.kdg.simulator.messaging.messagerunner.MessageRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import java.util.logging.Logger;
-
 @Component
+@ConditionalOnProperty(name = "messenger.type", havingValue = "queue")
 public class QueueMessenger implements Messenger {
-    private final MessageGenerator messageGenerator;
 
-    public QueueMessenger(MessageGenerator messageGenerator) {
-        this.messageGenerator = messageGenerator;
+    private final MessageRunner messageRunner;
+
+    public QueueMessenger(MessageRunner messageRunner) {
+        this.messageRunner = messageRunner;
     }
 
     @Override
     public void sendMessage() {
-        //TODO: message doorsturen naar Queue
-        System.out.println(messageGenerator.generateCameraMessage());
+        messageRunner.messageBuffering();
     }
 }
