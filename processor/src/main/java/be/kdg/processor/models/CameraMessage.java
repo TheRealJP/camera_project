@@ -1,4 +1,4 @@
-package be.kdg.simulator.models;
+package be.kdg.processor.models;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

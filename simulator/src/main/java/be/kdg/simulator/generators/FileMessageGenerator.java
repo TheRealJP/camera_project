@@ -40,15 +40,13 @@ public class FileMessageGenerator implements MessageGenerator {
         Resource resource = resourceLoader.getResource("files/camera_messages.txt"); //${file.path} werkt niet
         try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))) {
 
+            LocalDateTime currentTime = LocalDateTime.now();
             String line = "";
+
             while ((line = br.readLine()) != null) {
                 String[] split = line.split(",");
-                log.info("transforming file to cameramessages: delay between next message {}", split[2].trim());
-//                Thread.sleep(Long.parseLong(split[2].trim())); //duurt lang //delay //andere thread?? //meer rijen, nog langer wachten
-                long delay = Long.parseLong(split[2].trim()); //duurt lang //delay //andere thread?? //meer rijen, nog langer wachten
-                cameraMessages.add(new CameraMessage(Integer.parseInt(split[0]),
-                        LocalDateTime.now().plus(delay, ChronoField.MILLI_OF_DAY.getBaseUnit()),
-                        split[1]));
+                currentTime = currentTime.plus(Long.parseLong(split[2].trim()), ChronoField.MILLI_OF_DAY.getBaseUnit());
+                cameraMessages.add(new CameraMessage(Integer.parseInt(split[0]), currentTime, split[1]));
             }
         } catch (IOException e) {
             log.error("IOException occurred", e);

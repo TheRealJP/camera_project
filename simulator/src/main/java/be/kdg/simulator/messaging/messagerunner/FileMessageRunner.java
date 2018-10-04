@@ -32,6 +32,7 @@ public class FileMessageRunner implements MessageRunner {
     public void messageBuffering() {
         System.out.printf("messages amount %d", cameraMessages.size());
         for (CameraMessage msg : cameraMessages) {
+
             template.convertAndSend(queue.getName(), msg.toString());
             log.info(msg.toString());
         }
