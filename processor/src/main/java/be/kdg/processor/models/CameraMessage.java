@@ -16,6 +16,9 @@ public class CameraMessage {
         this.licensePlate = licensePlate;
     }
 
+    public CameraMessage() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,10 +36,10 @@ public class CameraMessage {
 
     @Override
     public String toString() {
-        return String.format("%2d, %s, %s, %s", id,
-                dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS")),
-                licensePlate);
+        return String.format("%2d, %s, %s", id,
+                licensePlate,
+                dateTime
+        );
     }
 
     public int getId() {

@@ -1,6 +1,5 @@
 package be.kdg.simulator.messaging.messengers;
 
-import be.kdg.sa.services.CameraServiceProxy;
 import be.kdg.simulator.messaging.messagerunner.MessageRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;

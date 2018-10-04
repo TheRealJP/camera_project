@@ -2,6 +2,11 @@ package be.kdg.simulator.messaging.messagerunner;
 
 import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.models.CameraMessage;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
@@ -15,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Component
@@ -41,24 +47,29 @@ public class RandomMessageRunner implements MessageRunner {
     @PostConstruct
     public void messageBuffering() {
         while (true) {
+
+            XmlMapper mapper = new XmlMapper();
+            JavaTimeModule javaTimeModule = new JavaTimeModule();
+            javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ISO_DATE_TIME));
+            mapper.registerModule(javaTimeModule);
+            mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
             try {
                 /* depending on moment of the day -> longer/shorter interval */
                 int hour = LocalDateTime.now().getHour();
                 if (hour > 7 && hour <= 9 || hour > 17 && hour <= 20) Thread.sleep(busyInterval);
                 else Thread.sleep(defaultInterval);
 
-                /* logging + sending message to queue */
                 CameraMessage msg = messageGenerator.generateCameraMessage();
+                String cameraMessageXml = mapper.writeValueAsString(msg);
+                System.out.println(cameraMessageXml);
+                template.convertAndSend(queue.getName(), cameraMessageXml);
 
-//                https://docs.spring.io/spring-amqp/reference/htmlsingle/#java-deserialization
-                Message message = MessageBuilder.withBody(msg.toString().getBytes())
-                        .setContentType(MessageProperties.CONTENT_TYPE_XML)
-                        .build();
-
-                template.convertAndSend(queue.getName(), msg.toString());
                 log.info(msg.toString());
             } catch (InterruptedException e) {
                 log.error(e.toString());
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
             }
         }
     }

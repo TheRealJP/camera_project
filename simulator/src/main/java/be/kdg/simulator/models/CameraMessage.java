@@ -1,7 +1,6 @@
 package be.kdg.simulator.models;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class CameraMessage {
@@ -15,6 +14,10 @@ public class CameraMessage {
         this.dateTime = dateTime;
         this.licensePlate = licensePlate;
     }
+
+    public CameraMessage() {
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -34,10 +37,10 @@ public class CameraMessage {
     @Override
     //TODO: tijd en datum terug samen om parsen makkelijker te maken
     public String toString() {
-        return String.format("%2d, %s, %s, %s", id,
-                dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS")),
-                licensePlate);
+        return String.format("%2d, %s, %s", id,
+                licensePlate,
+                dateTime
+        );
     }
 
     public int getId() {
