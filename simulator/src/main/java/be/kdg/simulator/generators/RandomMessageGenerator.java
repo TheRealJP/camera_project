@@ -59,8 +59,6 @@ public class RandomMessageGenerator implements MessageGenerator {
     }
 
     private void fillLicensePlateCollection() {
-//        log.info("collecting licenseplates...");
-
         for (int i = 0; i < 10; i++)
             licensePlates.add(randomLicensePlateGenerator());
     }

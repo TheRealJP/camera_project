@@ -32,6 +32,7 @@ public class CameraMessage {
     }
 
     @Override
+    //TODO: tijd en datum terug samen om parsen makkelijker te maken
     public String toString() {
         return String.format("%2d, %s, %s, %s", id,
                 dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),

@@ -4,6 +4,9 @@ import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.models.CameraMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,10 +49,16 @@ public class RandomMessageRunner implements MessageRunner {
 
                 /* logging + sending message to queue */
                 CameraMessage msg = messageGenerator.generateCameraMessage();
+
+//                https://docs.spring.io/spring-amqp/reference/htmlsingle/#java-deserialization
+                Message message = MessageBuilder.withBody(msg.toString().getBytes())
+                        .setContentType(MessageProperties.CONTENT_TYPE_XML)
+                        .build();
+
                 template.convertAndSend(queue.getName(), msg.toString());
                 log.info(msg.toString());
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error(e.toString());
             }
         }
     }

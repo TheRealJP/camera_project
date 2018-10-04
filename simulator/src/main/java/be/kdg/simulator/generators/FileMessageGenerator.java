@@ -37,7 +37,7 @@ public class FileMessageGenerator implements MessageGenerator {
     }
 
     private void collectMessages() {
-        Resource resource = resourceLoader.getResource("files/camera_messages.txt"); //${file.path} werkt niet
+        Resource resource = resourceLoader.getResource("files/camera_messages.csv"); //${file.path} werkt niet
         try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))) {
 
             LocalDateTime currentTime = LocalDateTime.now();

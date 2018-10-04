@@ -4,5 +4,5 @@ import be.kdg.processor.models.CameraMessage;
 import javafx.scene.Camera;
 
 public interface MessageTransformer {
-     CameraMessage transformToCameraMessage(String msg);
+     Object transformToObject(String msg);
 }
