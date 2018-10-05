@@ -47,7 +47,7 @@ public class RandomMessageRunner implements MessageRunner {
     @PostConstruct
     public void messageBuffering() {
         while (true) {
-
+            //TODO: aparte transformModule aanmaken
             XmlMapper mapper = new XmlMapper();
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ISO_DATE_TIME));
@@ -62,7 +62,6 @@ public class RandomMessageRunner implements MessageRunner {
 
                 CameraMessage msg = messageGenerator.generateCameraMessage();
                 String cameraMessageXml = mapper.writeValueAsString(msg);
-                System.out.println(cameraMessageXml);
                 template.convertAndSend(queue.getName(), cameraMessageXml);
 
                 log.info(msg.toString());

@@ -1,6 +1,8 @@
 package be.kdg.simulator;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import be.kdg.simulator.generators.MessageGenerator;
+import be.kdg.simulator.messaging.messengers.Messenger;
+import be.kdg.simulator.simulator.Simulator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -11,6 +13,15 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 public class SimulatorApplication {
+
+    private final MessageGenerator messageGenerator;
+    private final Messenger messenger;
+
+    public SimulatorApplication(MessageGenerator messageGenerator, Messenger messenger) {
+        this.messageGenerator = messageGenerator;
+        this.messenger = messenger;
+    }
+    
     public static void main(String[] args) {
         SpringApplication.run(SimulatorApplication.class, args);
     }

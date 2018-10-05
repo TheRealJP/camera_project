@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProcessorApplication {
     public static void main(String[] args) {
+
+//        runSimulation();
+
         SpringApplication.run(ProcessorApplication.class, args);
     }
 }
