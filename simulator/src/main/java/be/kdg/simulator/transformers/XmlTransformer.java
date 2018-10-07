@@ -1,7 +1,8 @@
-package be.kdg.processor.transformers;
+package be.kdg.simulator.transformers;
 
 
-import be.kdg.processor.models.CameraMessage;
+import be.kdg.simulator.models.CameraMessage;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -11,28 +12,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
 @ConditionalOnProperty(name = "transformer.type", havingValue = "xml")
-public class CameraMessageTransformer implements MessageTransformer {
+public class XmlTransformer implements MessageTransformer {
 
-    private final Logger log = LoggerFactory.getLogger(CameraMessageTransformer.class);
+    private final Logger log = LoggerFactory.getLogger(XmlTransformer.class);
 
     @Override
-    public CameraMessage transformMessage(String msg) {
+    public String transformMessage(CameraMessage msg) {
         try {
             XmlMapper mapper = new XmlMapper();
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ISO_DATE_TIME));
             mapper.registerModule(javaTimeModule);
             mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-            return mapper.readValue(msg, CameraMessage.class);
+            return mapper.writeValueAsString(msg);
 
-        } catch (IOException e) {
-            log.warn(e.toString());
+        } catch (JsonProcessingException e) {
+            log.error(e.toString());
         }
 
         return null;

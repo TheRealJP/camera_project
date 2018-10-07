@@ -8,10 +8,8 @@ import be.kdg.sa.services.LicensePlateServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 
@@ -30,23 +28,38 @@ public class CameraServiceUtility {
         this.lpProxy = lpProxy;
     }
 
-    public void emissionCheck(CameraMessage cm) {
+
+    public boolean emissionCheck(CameraMessage cm) {
         try {
-            String lpJson = lpProxy.get(cm.getLicensePlate());
-            String camJson = camProxy.get(cm.getId());
-
-            LicensePlate lp = objectMapper.readValue(lpJson, LicensePlate.class);
-            Camera camera = objectMapper.readValue(camJson, Camera.class);
-            int camNorm = camera.getEuroNorm();
-            int lpNorm = lp.getEuroNumber();
-
-            if (camNorm > lpNorm) {
+            Camera camera = collectCamera(cm);
+            LicensePlate lp = collectLicensePlate(cm);
+            if (camera.getEuroNorm() > lp.getEuroNumber()) {
                 log.info(String.format("Licenseplate %s will receive a emission fine. cameraNorm=%d, carNorm=%d)", lp.getPlateId(), camera.getEuroNorm(), lp.getEuroNumber()));
+                return true;
             }
 
         } catch (IOException e) {
             log.error(e.getMessage() + " | foute nummerplaat");
         }
+
+        return false;
+    }
+
+    public boolean speedingCheck(CameraMessage cm) {
+        //distance between 2 cameras
+        //calculate speed
+
+        return false;
+    }
+
+    private Camera collectCamera(CameraMessage cm) throws IOException {
+        String camJson = camProxy.get(cm.getId());
+        return objectMapper.readValue(camJson, Camera.class);
+    }
+
+    private LicensePlate collectLicensePlate(CameraMessage cm) throws IOException {
+        String lpJson = lpProxy.get(cm.getLicensePlate());
+        return objectMapper.readValue(lpJson, LicensePlate.class);
     }
 
 

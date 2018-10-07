@@ -11,18 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 // container wordt hier gebouwd bij run?
 // dit is ook gewoon een bean
 @SpringBootApplication
-@EnableScheduling
 public class SimulatorApplication {
-
-    private final MessageGenerator messageGenerator;
-    private final Messenger messenger;
-
-    public SimulatorApplication(MessageGenerator messageGenerator, Messenger messenger) {
-        this.messageGenerator = messageGenerator;
-        this.messenger = messenger;
-    }
-    
     public static void main(String[] args) {
         SpringApplication.run(SimulatorApplication.class, args);
+        Simulator.runSimulator();
     }
 }

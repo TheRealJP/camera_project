@@ -18,14 +18,8 @@ import java.util.ArrayList;
 
 @Configuration
 public class MessagingConfig {
-
     @Bean
     public Queue cameraQueue() {
         return new Queue("camera-queue");
-    }
-
-    @Bean
-    public ArrayList<CameraMessage> cameraMessages() {
-        return new ArrayList<>();
     }
 }
