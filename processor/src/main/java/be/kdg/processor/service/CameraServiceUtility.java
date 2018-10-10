@@ -33,6 +33,7 @@ public class CameraServiceUtility {
         try {
             Camera camera = collectCamera(cm);
             LicensePlate lp = collectLicensePlate(cm);
+            System.out.println(lp);
             if (camera.getEuroNorm() > lp.getEuroNumber()) {
                 log.info(String.format("Licenseplate %s will receive a emission fine. cameraNorm=%d, carNorm=%d)", lp.getPlateId(), camera.getEuroNorm(), lp.getEuroNumber()));
                 return true;

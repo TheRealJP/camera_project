@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+//https://docs.spring.io/spring-amqp/reference/htmlsingle/#message-builder
 @Component
 @ConditionalOnProperty(name = "transformer.type", havingValue = "xml")
 public class CameraMessageTransformer implements MessageTransformer {
