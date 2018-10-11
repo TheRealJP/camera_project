@@ -1,7 +1,6 @@
-package be.kdg.processor.models;
+package be.kdg.processor.models.messages;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class CameraMessage {

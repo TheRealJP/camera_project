@@ -1,4 +1,4 @@
-package be.kdg.processor.transformers;
+package be.kdg.processor.service.transformers;
 
 public interface MessageTransformer {
 

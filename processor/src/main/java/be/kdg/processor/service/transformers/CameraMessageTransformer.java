@@ -1,7 +1,7 @@
-package be.kdg.processor.transformers;
+package be.kdg.processor.service.transformers;
 
 
-import be.kdg.processor.models.CameraMessage;
+import be.kdg.processor.models.messages.CameraMessage;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

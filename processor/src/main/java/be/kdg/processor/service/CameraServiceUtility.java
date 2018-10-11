@@ -1,9 +1,12 @@
 package be.kdg.processor.service;
 
-import be.kdg.processor.models.CameraMessage;
+import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;
+import be.kdg.processor.models.violations.EmissionViolation;
+import be.kdg.sa.services.CameraNotFoundException;
 import be.kdg.sa.services.CameraServiceProxy;
+import be.kdg.sa.services.LicensePlateNotFoundException;
 import be.kdg.sa.services.LicensePlateServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -29,21 +32,21 @@ public class CameraServiceUtility {
     }
 
 
-    public boolean emissionCheck(CameraMessage cm) {
+    public EmissionViolation emissionCheck(CameraMessage cm) {
         try {
             Camera camera = collectCamera(cm);
             LicensePlate lp = collectLicensePlate(cm);
             System.out.println(lp);
             if (camera.getEuroNorm() > lp.getEuroNumber()) {
                 log.info(String.format("Licenseplate %s will receive a emission fine. cameraNorm=%d, carNorm=%d)", lp.getPlateId(), camera.getEuroNorm(), lp.getEuroNumber()));
-                return true;
+                return new EmissionViolation(camera.getEuroNorm(), lp.getEuroNumber(), lp.getPlateId());
             }
 
-        } catch (IOException e) {
-            log.error(e.getMessage() + " | foute nummerplaat");
+        } catch (IOException | LicensePlateNotFoundException | CameraNotFoundException e) {
+            log.error(e.getMessage());
         }
 
-        return false;
+        return null;
     }
 
     public boolean speedingCheck(CameraMessage cm) {

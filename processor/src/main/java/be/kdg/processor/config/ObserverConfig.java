@@ -10,13 +10,8 @@ import java.util.HashMap;
 
 @Configuration
 public class ObserverConfig {
-//    @Bean
-//    public Set<EmissionViolation> emissionViolations(){
-//        return new HashSet<>();
-//    }
-
     @Bean
-    public HashMap<LicensePlate, ArrayList<EmissionViolation>> emissionViolations(){
+    public HashMap<String, ArrayList<EmissionViolation>> emissionViolations(){
         return new HashMap<>();
     }
 }

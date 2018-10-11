@@ -1,6 +1,6 @@
 package be.kdg.processor.config;
 
-import be.kdg.processor.models.CameraMessage;
+import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.sa.services.CameraServiceProxy;
 import be.kdg.sa.services.LicensePlateServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,11 +24,6 @@ public class ConsumerConfig {
 
     @Bean
     public ArrayList<CameraMessage> cameraMessages() {
-        return new ArrayList<>();
-    }
-
-    @Bean
-    public ArrayList<String> licensePlates() {
         return new ArrayList<>();
     }
 

@@ -1,14 +1,14 @@
 package be.kdg.processor.messaging.consumers;
 
-import be.kdg.processor.models.CameraMessage;
-import be.kdg.processor.observer.Subject;
-import be.kdg.processor.service.CameraServiceUtility;
-import be.kdg.processor.transformers.MessageTransformer;
+import be.kdg.processor.models.messages.CameraMessage;
+import be.kdg.processor.service.transformers.MessageTransformer;
+import be.kdg.processor.service.violations.observers.ViolationObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+
 import java.util.Observable;
 
 //https://www.youtube.com/watch?v=ohL2HIBK1pg
@@ -19,26 +19,19 @@ import java.util.Observable;
 public class QueueConsumer extends Observable {
 
     private static final Logger log = LoggerFactory.getLogger(QueueConsumer.class);
-    private final CameraServiceUtility cameraServiceUtility;
     private final MessageTransformer transformer;
-    private final Subject subject;
+    private final ViolationObserver violationObserver;
 
-    public QueueConsumer(CameraServiceUtility cameraServiceUtility, MessageTransformer transformer, Subject subject) {
-        this.cameraServiceUtility = cameraServiceUtility;
+    public QueueConsumer(MessageTransformer transformer, ViolationObserver violationObserver) {
         this.transformer = transformer;
-        this.subject = subject;
+        this.violationObserver = violationObserver;
+        this.addObserver(violationObserver);
     }
 
     @RabbitHandler
     public void consume(String in) {
         CameraMessage cm = (CameraMessage) transformer.transformMessage(in); //transforms xml to cameramessage object
-//        subject.addMessage(cm); //observable
-        this.hasChanged();
-        this.notifyObservers(cm);
-        log.info("Message received: " +  cm);
+        violationObserver.update(this, cm);
+        log.info("Message received: " + cm);
     }
-
-
-
-
 }
