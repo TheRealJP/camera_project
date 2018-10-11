@@ -1,4 +1,4 @@
-package be.kdg.simulator.models;
+package be.kdg.processor.models.messages;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -18,7 +18,6 @@ public class CameraMessage {
     public CameraMessage() {
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,7 +34,6 @@ public class CameraMessage {
     }
 
     @Override
-    //TODO: tijd en datum terug samen om parsen makkelijker te maken
     public String toString() {
         return String.format("%2d, %s, %s", id,
                 licensePlate,

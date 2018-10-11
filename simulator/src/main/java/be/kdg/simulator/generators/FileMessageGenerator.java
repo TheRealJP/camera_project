@@ -3,53 +3,61 @@ package be.kdg.simulator.generators;
 import be.kdg.simulator.models.CameraMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
-import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
+import static java.nio.file.Files.lines;
 
 @Component
 @ConditionalOnProperty(name = "generator.type", havingValue = "file")
 public class FileMessageGenerator implements MessageGenerator {
 
+    @Value("${file.path}")
+    private String filepath;
     private static final Logger log = LoggerFactory.getLogger(FileMessageGenerator.class);
     private final ResourceLoader resourceLoader;
-    private final ArrayList<CameraMessage> cameraMessages;
     private int fileLineCounter = 0;
 
-    public FileMessageGenerator(ResourceLoader resourceLoader, ArrayList<CameraMessage> cameraMessages) {
+    public FileMessageGenerator(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
-        this.cameraMessages = cameraMessages;
-        collectMessages();
     }
 
     @Override
     public CameraMessage generateCameraMessage() {
-        if (cameraMessages.size() <= fileLineCounter) return null; //null value will be used to stop service?
-        return cameraMessages.get(fileLineCounter++);
+        return collectMessage();
     }
 
-    private void collectMessages() {
-        Resource resource = resourceLoader.getResource("files/camera_messages.txt"); //${file.path} werkt niet
-        try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))) {
-
-            LocalDateTime currentTime = LocalDateTime.now();
-            String line = "";
-
-            while ((line = br.readLine()) != null) {
-                String[] split = line.split(",");
-                currentTime = currentTime.plus(Long.parseLong(split[2].trim()), ChronoField.MILLI_OF_DAY.getBaseUnit());
-                cameraMessages.add(new CameraMessage(Integer.parseInt(split[0]), currentTime, split[1]));
+    /**
+     * Consumes file line by line instead of saving it into memory.
+     * Each line is transformed to a cameramessage and sent off to a messenger.
+     */
+    private CameraMessage collectMessage() {
+        Resource resource = resourceLoader.getResource(filepath); //${file.path} werkt niet
+        Supplier<Stream<String>> lines = () -> {
+            try {
+                return lines(Paths.get(resource.getFile().getPath()));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            log.error("IOException occurred", e);
-        }
+            return null;
+        };
+
+        if (fileLineCounter >= lines.get().count()) return null;
+        String line = lines.get().skip(fileLineCounter++).findFirst().get();
+        log.info("count: " + fileLineCounter);
+        LocalDateTime currentTime = LocalDateTime.now();
+        String[] split = line.split(",");
+        currentTime = currentTime.plus(Long.parseLong(split[2].trim()), ChronoField.MILLI_OF_DAY.getBaseUnit());
+        return new CameraMessage(Integer.parseInt(split[0]), currentTime, split[1]);
     }
 }

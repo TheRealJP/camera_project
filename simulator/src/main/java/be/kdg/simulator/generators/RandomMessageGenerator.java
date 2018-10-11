@@ -17,17 +17,20 @@ import java.util.Random;
 // this annotation adds this bean to spring container
 public class RandomMessageGenerator implements MessageGenerator {
 
+    /*traffic intensity*/
+    @Value("#{${default.traffic}}")
+    private int defaultInterval;
+    @Value("#{${busy.traffic}}")
+    private int busyInterval;
+
     private static final Logger log = LoggerFactory.getLogger(RandomMessageGenerator.class);
     @Value("#{${camera.amount}}")
     private int maxId;
-    private ArrayList<String> licensePlates;
     private Random r;
 
-
     public RandomMessageGenerator() {
-        this.licensePlates = new ArrayList<>();
         this.r = new Random();
-        fillLicensePlateCollection();
+//        fillLicensePlateCollection();
     }
 
     /**
@@ -40,10 +43,21 @@ public class RandomMessageGenerator implements MessageGenerator {
      */
     @Override
     public CameraMessage generateCameraMessage() {
-        return new CameraMessage(r.nextInt(maxId) + 1,
-                LocalDateTime.now(), randomLicensePlateGenerator());
+        trafficSimulator();
+        return new CameraMessage(r.nextInt(maxId) + 1, LocalDateTime.now(), randomLicensePlateGenerator());
     }
 
+    /*implies traffic intensity by putting a delay between each message*/
+    private void trafficSimulator() {
+        try {
+            int hour = LocalDateTime.now().getHour();
+            if (hour > 7 && hour <= 9 || hour > 17 && hour <= 20) Thread.sleep(busyInterval);
+            else Thread.sleep(defaultInterval);
+        } catch (InterruptedException e) {
+            log.error(e.getMessage());
+        }
+    }
+    
     private String randomLicensePlateGenerator() {
         StringBuilder licensePlate = new StringBuilder("1-");
         StringBuilder textPart = new StringBuilder();
@@ -56,12 +70,5 @@ public class RandomMessageGenerator implements MessageGenerator {
         }
         licensePlate.append(textPart).append("-").append(numberPart);
         return licensePlate.toString();
-    }
-
-    private void fillLicensePlateCollection() {
-//        log.info("collecting licenseplates...");
-
-        for (int i = 0; i < 10; i++)
-            licensePlates.add(randomLicensePlateGenerator());
     }
 }

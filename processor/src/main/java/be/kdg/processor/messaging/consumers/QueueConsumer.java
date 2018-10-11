@@ -1,33 +1,37 @@
 package be.kdg.processor.messaging.consumers;
 
-import be.kdg.processor.models.CameraMessage;
-import be.kdg.processor.transformers.MessageTransformer;
+import be.kdg.processor.models.messages.CameraMessage;
+import be.kdg.processor.service.transformers.MessageTransformer;
+import be.kdg.processor.service.violations.observers.ViolationObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Observable;
 
-//@Component
-@Service
-public class QueueConsumer {
+//https://www.youtube.com/watch?v=ohL2HIBK1pg
+
+
+@Component
+@RabbitListener(queues = "camera-queue")
+public class QueueConsumer extends Observable {
 
     private static final Logger log = LoggerFactory.getLogger(QueueConsumer.class);
-    private final MessageTransformer messageTransformer;
-    private final ArrayList<CameraMessage> cameraMessages; //doesnt share relation with arraylist in the simulator module
+    private final MessageTransformer transformer;
+    private final ViolationObserver violationObserver;
 
-    public QueueConsumer(MessageTransformer messageTransformer, ArrayList<CameraMessage> cameraMessages) {
-        this.messageTransformer = messageTransformer;
-        this.cameraMessages = cameraMessages;
+    public QueueConsumer(MessageTransformer transformer, ViolationObserver violationObserver) {
+        this.transformer = transformer;
+        this.violationObserver = violationObserver;
+        this.addObserver(violationObserver);
     }
 
-    @RabbitListener(queues = "camera-queue")
+    @RabbitHandler
     public void consume(String in) {
-        cameraMessages.add(messageTransformer.transformToCameraMessage(in));
-        log.info("[x] Message consumed/received: " + in);
+        CameraMessage cm = (CameraMessage) transformer.transformMessage(in); //transforms xml to cameramessage object
+        violationObserver.update(this, cm);
+        log.info("Message received: " + cm);
     }
-
 }
