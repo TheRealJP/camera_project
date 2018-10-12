@@ -228,11 +228,13 @@
     <session id="1588919582">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.15" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -241,7 +243,8 @@
           <entry key="csv" value="4" />
           <entry key="extra_platen" value="2" />
           <entry key="gradle" value="5" />
-          <entry key="java" value="44" />
+          <entry key="java" value="51" />
+          <entry key="notes" value="1" />
           <entry key="properties" value="1" />
           <entry key="txt" value="2" />
         </counts>
@@ -249,8 +252,8 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Groovy" value="5" />
-          <entry key="JAVA" value="44" />
-          <entry key="PLAIN_TEXT" value="9" />
+          <entry key="JAVA" value="51" />
+          <entry key="PLAIN_TEXT" value="10" />
           <entry key="Properties" value="1" />
         </counts>
       </usages-collector>
@@ -259,7 +262,8 @@
           <entry key="cameraId" value="19" />
           <entry key="csv" value="19" />
           <entry key="gradle" value="1" />
-          <entry key="java" value="3273" />
+          <entry key="java" value="3306" />
+          <entry key="notes" value="76" />
           <entry key="properties" value="59" />
           <entry key="txt" value="34" />
         </counts>
@@ -267,8 +271,8 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="1" />
-          <entry key="JAVA" value="3273" />
-          <entry key="PLAIN_TEXT" value="72" />
+          <entry key="JAVA" value="3306" />
+          <entry key="PLAIN_TEXT" value="148" />
           <entry key="Properties" value="59" />
         </counts>
       </usages-collector>
@@ -281,6 +285,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="531">
               <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/observer/observers/EmissionObserver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -993,7 +1009,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$/base" value="4615813604000" />
+        <entry key="$PROJECT_DIR$/base" value="4616090270035" />
         <entry key="$PROJECT_DIR$/base/.gradle" value="0" />
         <entry key="$PROJECT_DIR$/base/build.gradle" value="3266097758" />
         <entry key="$PROJECT_DIR$/base/settings.gradle" value="419040535" />
@@ -1003,7 +1019,7 @@
         <entry key="$PROJECT_DIR$/processor/build.gradle" value="3493100634" />
         <entry key="$PROJECT_DIR$/processor/settings.gradle" value="1559373882" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="419040535" />
-        <entry key="$PROJECT_DIR$/simulator" value="4613796800000" />
+        <entry key="$PROJECT_DIR$/simulator" value="4616090278591" />
         <entry key="$PROJECT_DIR$/simulator/.gradle" value="0" />
         <entry key="$PROJECT_DIR$/simulator/build.gradle" value="4003504548" />
         <entry key="$PROJECT_DIR$/simulator/settings.gradle" value="2139311247" />
@@ -1430,10 +1446,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1052" />
-    <option name="y" value="218" />
-    <option name="width" value="1065" />
-    <option name="height" value="1059" />
+    <option name="x" value="188" />
+    <option name="y" value="117" />
+    <option name="width" value="1091" />
+    <option name="height" value="920" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -1477,15 +1493,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="processor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="camera_project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="processor" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="processor" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="camera_project" type="b2602c69:ProjectViewProjectNode" />
@@ -1946,7 +1953,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="55" y="25" width="2505" height="1415" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49825785" visible="true" weight="0.1911346" />
