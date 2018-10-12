@@ -46,4 +46,14 @@ public class Camera {
     public int getEuroNorm() {
         return euroNorm;
     }
+
+    @Override
+    public String toString() {
+        return "Camera{" +
+                "cameraId=" + cameraId +
+                ", location=" + location +
+                ", segment=" + segment +
+                ", euroNorm=" + euroNorm +
+                '}';
+    }
 }
