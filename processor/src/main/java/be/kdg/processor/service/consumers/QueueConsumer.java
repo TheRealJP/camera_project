@@ -1,4 +1,4 @@
-package be.kdg.processor.messaging.consumers;
+package be.kdg.processor.service.consumers;
 
 import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.service.transformers.MessageTransformer;
@@ -16,7 +16,7 @@ import java.util.Observable;
 
 @Component
 @RabbitListener(queues = "camera-queue")
-public class QueueConsumer extends Observable {
+public class QueueConsumer extends Observable implements Consumer {
 
     private static final Logger log = LoggerFactory.getLogger(QueueConsumer.class);
     private final MessageTransformer transformer;
