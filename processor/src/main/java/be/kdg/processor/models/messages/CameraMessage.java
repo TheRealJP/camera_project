@@ -1,5 +1,8 @@
 package be.kdg.processor.models.messages;
 
+import javafx.application.Application;
+import org.springframework.context.ApplicationEvent;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -9,14 +12,16 @@ public class CameraMessage {
     private LocalDateTime dateTime;
     private String licensePlate;
 
-    public CameraMessage(int id, LocalDateTime dateTime, String licensePlate) {
+    public CameraMessage() {
+    }
+
+    public CameraMessage(int id, LocalDateTime dateTime, String licensePlate ) {
         this.id = id;
         this.dateTime = dateTime;
         this.licensePlate = licensePlate;
     }
 
-    public CameraMessage() {
-    }
+
 
     @Override
     public boolean equals(Object o) {
