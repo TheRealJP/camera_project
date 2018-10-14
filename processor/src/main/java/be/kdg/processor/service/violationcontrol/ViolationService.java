@@ -1,4 +1,4 @@
-package be.kdg.processor.service;
+package be.kdg.processor.service.violationcontrol;
 
 import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;

@@ -1,4 +1,4 @@
-package be.kdg.processor.service;
+package be.kdg.processor.service.violationcontrol;
 
 import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.models.proxy.Camera;
@@ -32,18 +32,20 @@ public class ViolationServiceImplementation implements ViolationService {
     private final ObjectMapper objectMapper;
     private final Logger log = LoggerFactory.getLogger(ViolationServiceImplementation.class);
     private final MessageBuffer messageBuffer;
+    private final FineService fineService;
 
     @Value("${timeframe.emission}")
     private int timeframe;
     private ArrayList<Violation> messageViolations;
     private ArrayList<CameraMessage> cameraMessages;
 
-    public ViolationServiceImplementation(CameraServiceProxy camProxy, LicensePlateServiceProxy lpProxy, ObjectMapper objectMapper, MessageBuffer messageBuffer) {
+    public ViolationServiceImplementation(CameraServiceProxy camProxy, LicensePlateServiceProxy lpProxy, ObjectMapper objectMapper, MessageBuffer messageBuffer, FineService fineService) {
         this.camProxy = camProxy;
         this.lpProxy = lpProxy;
 
         this.objectMapper = objectMapper;
         this.messageBuffer = messageBuffer;
+        this.fineService = fineService;
 
         this.messageViolations = new ArrayList<>();
         this.cameraMessages = messageBuffer.getCameraMessages();
@@ -61,13 +63,16 @@ public class ViolationServiceImplementation implements ViolationService {
     }
 
     private void checkEmission() throws IOException {
+        //DATABANK: get camaramessages van de laatste 30 minuten WHERE timestamp > timestamp - timeframe
+        // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
+
         for (CameraMessage cm : cameraMessages) {
             Camera cam = collectCamera(cm.getId());
             LicensePlate lp = collectLicensePlate(cm.getLicensePlate());
 
             if (cam.getEuroNorm() > lp.getEuroNumber()) {
                 EmissionViolation emissionViolation = new EmissionViolation(cam.getEuroNorm(), lp.getEuroNumber(), lp.getPlateId());
-                if (!messageViolations.contains(emissionViolation) && timeframe < 100000) { //TODO: calculate interval between + 1 day and cameramessage?
+                if (!messageViolations.contains(emissionViolation) /*&& timeframe < 100000*/) { //TODO: calculate interval between + 1 day and cameramessage?
                     log.info(String.format("Licenseplate %s will receive a emission fine. cameraNorm=%d, carNorm=%d)", lp.getPlateId(), cam.getEuroNorm(), lp.getEuroNumber()));
                     messageViolations.add(emissionViolation);
                     log.info(String.valueOf(messageViolations.size()));
@@ -96,17 +101,19 @@ public class ViolationServiceImplementation implements ViolationService {
                         int speed = calculateSpeed(cam.getSegment().getDistance(), cm, cm2);
                         int speedLimit = cam.getSegment().getSpeedLimit();
                         if (speed > speedLimit) {
-                            System.out.println("main camera:" + cam);
-                            System.out.println("other camera :" + otherCamera);
-                            messageViolations.add(new SpeedingViolation(speed, lp, cam, otherCamera));
-                            log.info(String.valueOf(messageViolations.size()));
+                            SpeedingViolation speedingViolation = new SpeedingViolation(speed, lp, cam, otherCamera);
+                            // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
+                            if (!messageViolations.contains(speedingViolation) /*&& timeframe < 100000*/) {
+                                messageViolations.add(new SpeedingViolation(speed, lp, cam, otherCamera));
+                                log.info(String.format("Licenseplate %s will receive a speeding fine. speed=%d, carNorm=%d)", lp.getPlateId(), speed, speedLimit));
+                                log.info(String.valueOf(messageViolations.size()));
+                            }
                         }
                     }
                 }
             }
         }
     }
-
 
     private int calculateSpeed(int distance, CameraMessage firstMessage, CameraMessage secondMessage) {
         int firstMessageTime = firstMessage.getDateTime().toLocalTime().toSecondOfDay();

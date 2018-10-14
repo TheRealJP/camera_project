@@ -1,12 +1,14 @@
 package be.kdg.processor.config;
 
 import be.kdg.processor.models.messages.CameraMessage;
-import be.kdg.processor.service.ViolationService;
-import be.kdg.processor.service.ViolationServiceImplementation;
 import be.kdg.processor.service.listeners.MessageBuffer;
+import be.kdg.processor.service.violationcontrol.FineService;
+import be.kdg.processor.service.violationcontrol.ViolationService;
+import be.kdg.processor.service.violationcontrol.ViolationServiceImplementation;
 import be.kdg.sa.services.CameraServiceProxy;
 import be.kdg.sa.services.LicensePlateServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -36,8 +38,23 @@ public class ConsumerConfig {
     }
 
     @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
+//    @Bean
+//    public Fine fine(){
+//        return new Fine(0,new SpeedingViolation(4,null,null, null));
+//    }
+
+    @Bean
+    public FineService fineService() {
+        return new FineService(fineFactor);
+    }
+
+    @Bean
     public ViolationService violationService() {
-        return new ViolationServiceImplementation(camProxy(), licensePlateServiceProxy(), objectMapper(), messageBuffer());
+        return new ViolationServiceImplementation(camProxy(), licensePlateServiceProxy(), objectMapper(), messageBuffer(), fineService());
     }
 
     @Bean

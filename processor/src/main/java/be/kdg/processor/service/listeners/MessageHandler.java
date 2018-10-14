@@ -2,10 +2,9 @@ package be.kdg.processor.service.listeners;
 
 import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.service.events.ConsumeEvent;
-import be.kdg.processor.service.ViolationService;
+import be.kdg.processor.service.violationcontrol.ViolationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
