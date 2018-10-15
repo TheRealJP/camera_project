@@ -1,6 +1,7 @@
 package be.kdg.processor.service.listeners;
 
 import be.kdg.processor.models.messages.CameraMessage;
+import be.kdg.processor.repositories.CameraMessageRepository;
 import be.kdg.processor.service.events.ConsumeEvent;
 import be.kdg.processor.service.violationcontrol.ViolationService;
 import org.slf4j.Logger;
@@ -12,13 +13,15 @@ import java.io.IOException;
 
 @Component
 public class MessageHandler implements ApplicationListener<ConsumeEvent> {
-    private ViolationService violationService;
+    private final ViolationService violationService;
     private final Logger log = LoggerFactory.getLogger(MessageHandler.class);
     private final MessageBuffer messageBuffer;
+    private final CameraMessageRepository cmr;
 
-    public MessageHandler(ViolationService violationService, MessageBuffer messageBuffer) {
+    public MessageHandler(ViolationService violationService, MessageBuffer messageBuffer, CameraMessageRepository cmr) {
         this.violationService = violationService;
         this.messageBuffer = messageBuffer;
+        this.cmr = cmr;
     }
 
     /**
@@ -31,7 +34,7 @@ public class MessageHandler implements ApplicationListener<ConsumeEvent> {
     public void onApplicationEvent(ConsumeEvent event) {
         try {
             CameraMessage cm = event.getCameraMessage();
-            messageBuffer.addMessage(cm);
+            cmr.save(cm);
             violationService.checkViolation();
         } catch (IOException e) {
             log.error(e.getMessage());

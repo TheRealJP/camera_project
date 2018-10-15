@@ -2,6 +2,7 @@ package be.kdg.processor.service.violationcontrol;
 
 import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 

@@ -1,38 +1,42 @@
 package be.kdg.processor.models.violations;
 
 
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.util.Objects;
 
+
+@Data
+@Entity
+@DiscriminatorValue("emission")
 public class EmissionViolation extends Violation {
+    @Column
     private int cameraEuroNorm;
+    @Column
     private int licensePlateEuroNorm;
-    private String licensePlate;
-    @Value("${2}")
-    private double emissionFineFactor;
+
 
     public EmissionViolation(int cameraEuroNorm, int licensePlateEuroNorm, String licensePlate) {
         this.cameraEuroNorm = cameraEuroNorm;
         this.licensePlateEuroNorm = licensePlateEuroNorm;
-        this.licensePlate = licensePlate;
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         EmissionViolation that = (EmissionViolation) o;
         return cameraEuroNorm == that.cameraEuroNorm &&
-                licensePlateEuroNorm == that.licensePlateEuroNorm &&
-                Double.compare(that.emissionFineFactor, emissionFineFactor) == 0 &&
-                Objects.equals(licensePlate, that.licensePlate);
+                licensePlateEuroNorm == that.licensePlateEuroNorm;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cameraEuroNorm, licensePlateEuroNorm, licensePlate, emissionFineFactor);
+        return Objects.hash(super.hashCode(), cameraEuroNorm, licensePlateEuroNorm);
     }
 
     @Override
@@ -40,7 +44,6 @@ public class EmissionViolation extends Violation {
         return "EmissionViolation{" +
                 "cameraEuroNorm=" + cameraEuroNorm +
                 ", licensePlateEuroNorm=" + licensePlateEuroNorm +
-                ", licensePlate='" + licensePlate + '\'' +
                 '}';
     }
 }

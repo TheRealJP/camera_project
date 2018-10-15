@@ -14,7 +14,4 @@ public class ObserverConfig {
     public HashMap<String, ArrayList<EmissionViolation>> emissionViolations(){
                 return new HashMap<>();
     }
-
-
-
 }

@@ -1,6 +1,7 @@
 package be.kdg.processor.config;
 
 import be.kdg.processor.models.messages.CameraMessage;
+import be.kdg.processor.repositories.FineRepository;
 import be.kdg.processor.service.listeners.MessageBuffer;
 import be.kdg.processor.service.violationcontrol.FineService;
 import be.kdg.processor.service.violationcontrol.ViolationService;
@@ -40,21 +41,6 @@ public class ConsumerConfig {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
-    }
-
-//    @Bean
-//    public Fine fine(){
-//        return new Fine(0,new SpeedingViolation(4,null,null, null));
-//    }
-
-    @Bean
-    public FineService fineService() {
-        return new FineService(fineFactor);
-    }
-
-    @Bean
-    public ViolationService violationService() {
-        return new ViolationServiceImplementation(camProxy(), licensePlateServiceProxy(), objectMapper(), messageBuffer(), fineService());
     }
 
     @Bean

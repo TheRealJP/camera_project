@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.anyOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.springframework.util.Assert.isInstanceOf;
 
 @RunWith(SpringRunner.class)
@@ -32,6 +31,6 @@ public class SimulatorApplicationTests {
         assertThat(cameraMessage.getLicensePlate(), Matchers.matchesPattern("^1-\\w{3}-\\d{3}$"));
         assertThat(cameraMessage, Matchers.notNullValue());
         isInstanceOf(LocalDateTime.class, cameraMessage.getDateTime(), "Its not a date!");
-        isInstanceOf(Integer.class, cameraMessage.getId(), "Its not a number!");
+        isInstanceOf(Integer.class, cameraMessage.getCameraId(), "Its not a number!");
     }
 }

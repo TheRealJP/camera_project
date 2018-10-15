@@ -1,10 +1,20 @@
 package be.kdg.processor.models.proxy;
 // {"cameraId":4,"location":{"lat":51.203512,"long":4.437337},"segment":{"connectedCameraId":5,"distance":550,"speedLimit":50},"euroNorm":3}
+
+import javax.persistence.*;
+
+@Entity
 public class Camera {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int cameraId;
+    @OneToOne(targetEntity = Location.class)
     private Location location;
+    @OneToOne(targetEntity = Segment.class)
     private Segment segment;
+    @Column
     private int euroNorm;
+
 
     public Camera() {
     }

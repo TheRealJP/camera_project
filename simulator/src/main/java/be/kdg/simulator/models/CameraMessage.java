@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class CameraMessage {
 
-    private int id;
+    private int cameraId;
     private LocalDateTime dateTime;
     private String licensePlate;
 
-    public CameraMessage(int id, LocalDateTime dateTime, String licensePlate) {
-        this.id = id;
+    public CameraMessage(int cameraId, LocalDateTime dateTime, String licensePlate) {
+        this.cameraId = cameraId;
         this.dateTime = dateTime;
         this.licensePlate = licensePlate;
     }
@@ -24,27 +24,27 @@ public class CameraMessage {
         if (this == o) return true;
         if (!(o instanceof CameraMessage)) return false;
         CameraMessage that = (CameraMessage) o;
-        return id == that.id &&
+        return cameraId == that.cameraId &&
                 Objects.equals(dateTime, that.dateTime) &&
                 Objects.equals(licensePlate, that.licensePlate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dateTime, licensePlate);
+        return Objects.hash(cameraId, dateTime, licensePlate);
     }
 
     @Override
     //TODO: tijd en datum terug samen om parsen makkelijker te maken
     public String toString() {
-        return String.format("%2d, %s, %s", id,
+        return String.format("%2d, %s, %s", cameraId,
                 licensePlate,
                 dateTime
         );
     }
 
-    public int getId() {
-        return id;
+    public int getCameraId() {
+        return cameraId;
     }
 
     public LocalDateTime getDateTime() {

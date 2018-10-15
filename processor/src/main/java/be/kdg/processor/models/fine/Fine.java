@@ -1,7 +1,7 @@
-package be.kdg.processor.models.violations;
+package be.kdg.processor.models.fine;
 
-import lombok.*;
-import org.springframework.stereotype.Service;
+import be.kdg.processor.models.violations.Violation;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -16,7 +16,7 @@ public class Fine {
     @Column
     private double amount;
 
-    @OneToOne(targetEntity = Violation.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = Violation.class, fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Violation violation;
 
     public Fine() {
