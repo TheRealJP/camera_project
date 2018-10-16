@@ -16,7 +16,7 @@ public abstract class Violation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @OneToOne(targetEntity = Segment.class, cascade = {CascadeType.ALL})
     private Segment segment;

@@ -1,11 +1,6 @@
 package be.kdg.processor.config;
 
 import be.kdg.processor.models.messages.CameraMessage;
-import be.kdg.processor.repositories.FineRepository;
-import be.kdg.processor.service.listeners.MessageBuffer;
-import be.kdg.processor.service.violationcontrol.FineService;
-import be.kdg.processor.service.violationcontrol.ViolationService;
-import be.kdg.processor.service.violationcontrol.ViolationServiceImplementation;
 import be.kdg.sa.services.CameraServiceProxy;
 import be.kdg.sa.services.LicensePlateServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,10 +38,6 @@ public class ConsumerConfig {
         return new ModelMapper();
     }
 
-    @Bean
-    public MessageBuffer messageBuffer() {
-        return new MessageBuffer(cameraMessages());
-    }
 
 
 }

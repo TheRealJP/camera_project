@@ -2,43 +2,35 @@ package be.kdg.processor.service.listeners;
 
 import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.repositories.CameraMessageRepository;
+import be.kdg.processor.service.ViolationHandler;
 import be.kdg.processor.service.events.ConsumeEvent;
-import be.kdg.processor.service.violationcontrol.ViolationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 @Component
 public class MessageHandler implements ApplicationListener<ConsumeEvent> {
-    private final ViolationService violationService;
     private final Logger log = LoggerFactory.getLogger(MessageHandler.class);
-    private final MessageBuffer messageBuffer;
     private final CameraMessageRepository cmr;
+    private final ViolationHandler violationHandler;
 
-    public MessageHandler(ViolationService violationService, MessageBuffer messageBuffer, CameraMessageRepository cmr) {
-        this.violationService = violationService;
-        this.messageBuffer = messageBuffer;
+    public MessageHandler(CameraMessageRepository cmr, ViolationHandler violationHandler) {
         this.cmr = cmr;
+        this.violationHandler = violationHandler;
     }
 
     /**
-     * Checks if one of the cameraMessages has a violation
      * (check on double entries? datetime is unique...still have to check)
      * insert new row into database
      */
 
     @Override
     public void onApplicationEvent(ConsumeEvent event) {
-        try {
-            CameraMessage cm = event.getCameraMessage();
-            cmr.save(cm);
-            violationService.checkViolation();
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
+        CameraMessage cm = event.getCameraMessage();
+        cmr.save(cm);
+        log.info("saved new message: " + cm.toString());
+        violationHandler.handleViolations();
     }
 }
 

@@ -35,7 +35,6 @@ public class QueueConsumer implements Consumer {
     public void consume(String in) {
         CameraMessage cm = (CameraMessage) transformer.transformMessage(in); //transforms xml to cameramessage object
         applicationEventPublisher.publishEvent(new ConsumeEvent(this, cm));
-        log.info("Message received: " + cm);
     }
 
 }

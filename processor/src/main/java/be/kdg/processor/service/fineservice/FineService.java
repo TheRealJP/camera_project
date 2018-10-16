@@ -1,7 +1,7 @@
-package be.kdg.processor.service.violationcontrol;
+package be.kdg.processor.service.fineservice;
 
-import be.kdg.processor.models.violations.EmissionViolation;
 import be.kdg.processor.models.fine.Fine;
+import be.kdg.processor.models.violations.EmissionViolation;
 import be.kdg.processor.models.violations.SpeedingViolation;
 import be.kdg.processor.models.violations.Violation;
 import be.kdg.processor.repositories.FineRepository;
@@ -22,18 +22,21 @@ public class FineService {
 
     private Fine calculateFine(Violation violation) {
         Fine fine = new Fine();
+
         if (violation instanceof SpeedingViolation) {
             SpeedingViolation sv = (SpeedingViolation) violation;
-            fineFactor = 5;
+            fineFactor = 3;
             double amount = sv.getSpeed() - sv.getFirstCamera().getSegment().getSpeedLimit() * fineFactor;
             fine.setAmount(amount);
             fine.setViolation(sv);
+
         } else if (violation instanceof EmissionViolation) {
             EmissionViolation ev = (EmissionViolation) violation;
-            fineFactor = 5;
+            fineFactor = 150;
             fine.setAmount(fineFactor);
             fine.setViolation(ev);
         }
+
         return fine;
     }
 
