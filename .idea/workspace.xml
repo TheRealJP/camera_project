@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java" line="17" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="b4df6be3-66bd-4eaa-934f-f16dc2850daa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/simulator/src/main/resources/files/speedviolation_test_camera_messages.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/ConsumerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/ConsumerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/ViolationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/ViolationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/LicensePlate.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/LicensePlate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/EmissionViolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/EmissionViolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/SpeedingViolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/SpeedingViolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/Violation.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/Violation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/ViolationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/ViolationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/consumers/QueueConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/consumers/QueueConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/listeners/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/listeners/MessageHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/ViolationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/ViolationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processor/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulator/src/main/resources/files/camera_messages.csv" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/resources/files/camera_messages.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/src/main/resources/files/extra_platen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator/src/main/resources/files/speedviolation_test_camera_messages.csv" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/resources/files/speedviolation_test_camera_messages.csv" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/simulator/.gradle/" />
     <ignored path="$PROJECT_DIR$/simulator/build/" />
@@ -222,20 +213,20 @@
           <entry key="JavaScript-modules-diagram//home/jonathan/Documenten/camera_project/processor/src/main/java/be/kdg/processor/models/messages;/home/jonathan/Documenten/camera_project/processor/src/main/java/be/kdg/processor/models/proxy;/home/jonathan/Documenten/camera_project/processor/src/main/java/be/kdg/processor/models/violations;/home/jonathan/Documenten/camera_project/processor/src/main/java/be/kdg/processor/repositories;" value="1" />
           <entry key="LOCATION" value="7" />
           <entry key="SEGMENTS" value="9" />
-          <entry key="VIOLATION" value="1" />
+          <entry key="VIOLATION" value="3" />
           <entry key="VIOLATIONS" value="19" />
           <entry key="cameraId" value="2" />
           <entry key="class" value="15" />
-          <entry key="csv" value="7" />
+          <entry key="csv" value="8" />
           <entry key="extra_platen" value="3" />
           <entry key="gitignore" value="1" />
           <entry key="gradle" value="10" />
           <entry key="html" value="3" />
-          <entry key="java" value="518" />
+          <entry key="java" value="523" />
           <entry key="models" value="1" />
           <entry key="notes" value="1" />
           <entry key="processor" value="1" />
-          <entry key="properties" value="18" />
+          <entry key="properties" value="19" />
           <entry key="sql" value="1" />
           <entry key="txt" value="7" />
         </counts>
@@ -244,36 +235,36 @@
         <counts>
           <entry key="CLASS" value="15" />
           <entry key="CSV" value="3" />
-          <entry key="Database Element" value="72" />
-          <entry key="Enforced Plain Text" value="4" />
+          <entry key="Database Element" value="74" />
+          <entry key="Enforced Plain Text" value="5" />
           <entry key="Groovy" value="10" />
           <entry key="HTML" value="3" />
-          <entry key="JAVA" value="518" />
+          <entry key="JAVA" value="523" />
           <entry key="PLAIN_TEXT" value="14" />
-          <entry key="Properties" value="18" />
+          <entry key="Properties" value="19" />
           <entry key="Scratch" value="1" />
           <entry key="UML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="csv" value="29" />
+          <entry key="csv" value="54" />
           <entry key="dummy" value="140" />
           <entry key="gitignore" value="1" />
           <entry key="gradle" value="47" />
-          <entry key="java" value="23782" />
-          <entry key="properties" value="621" />
+          <entry key="java" value="24189" />
+          <entry key="properties" value="646" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSV" value="1" />
-          <entry key="Enforced Plain Text" value="28" />
+          <entry key="CSV" value="25" />
+          <entry key="Enforced Plain Text" value="29" />
           <entry key="Groovy" value="47" />
-          <entry key="JAVA" value="23782" />
+          <entry key="JAVA" value="24189" />
           <entry key="PLAIN_TEXT" value="142" />
-          <entry key="Properties" value="621" />
+          <entry key="Properties" value="646" />
         </counts>
       </usages-collector>
     </session>
@@ -333,19 +324,35 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/ViolationHandler.java">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+            <state relative-caret-position="289">
+              <caret line="30" column="28" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/ViolationHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="54" column="21" lean-forward="true" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+            <state relative-caret-position="349">
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/Violation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+              <folding>
+                <element signature="e#222#227#0" />
+                <element signature="method#Violation#0;class#Violation#0" />
+                <element signature="method#Violation#1;class#Violation#0" />
+                <element signature="method#Violation#0;class#Violation#0" />
+                <element signature="method#equals#0;class#Violation#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -356,31 +363,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/files/camera_messages.csv">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/EmissionViolation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/LicensePlate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="170">
+              <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
               <folding>
-                <element signature="e#2138#2139#0" expanded="true" />
+                <element signature="method#equals#0;class#EmissionViolation#0" />
+                <element signature="method#toString#0;class#EmissionViolation#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/messages/CameraMessage.java">
+        <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/files/camera_messages.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="51">
+              <caret line="3" column="16" lean-forward="true" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -388,22 +387,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="94">
+              <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/Camera.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
-              <folding>
-                <element signature="e#1405#1406#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1461,7 +1448,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/publishers/ConsumeEvent.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/ViolationService.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violations/observers/EmissionObserver.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violations/scanner/SpeedingViolationService.java" />
@@ -1480,7 +1466,6 @@
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/repositories/FineRepository.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/Camera.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/Location.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/EmissionViolation.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/models/CameraMessage.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/messages/CameraMessage.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/fine/Fine.java" />
@@ -1497,21 +1482,23 @@
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/ViolationHandler.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/listeners/MessageBuffer.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/fineservice/FineService.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/LicensePlate.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/ConsumerConfig.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/listeners/MessageHandler.java" />
         <option value="$PROJECT_DIR$/processor/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/SpeedingViolation.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/ViolationService.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/consumers/QueueConsumer.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/consumers/Consumer.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/ViolationConfig.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/Violation.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/ViolationHandler.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/resources/files/camera_messages.csv" />
+        <option value="$PROJECT_DIR$/simulator/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/LicensePlate.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/SpeedingViolation.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/resources/files/speedviolation_test_camera_messages.csv" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/Violation.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/EmissionViolation.java" />
       </list>
     </option>
   </component>
@@ -1570,6 +1557,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="processor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="camera_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="processor" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="processor" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="camera_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="processor" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="processor" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="violations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="camera_project" type="b2602c69:ProjectViewProjectNode" />
@@ -1684,7 +1690,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;das://5ef079cf-a9e6-4c13-8ef3-b7ce89786e3a/database/PROCESSOR/schema/PUBLIC/table/FINES&#10;CachingConnectionFactory&#9;PSI&#9;JAVA://org.springframework.amqp.rabbit.connection.CachingConnectionFactory" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539812763868" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539817074433" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="database.console.LAST_STATE" value="false" />
@@ -1963,7 +1969,7 @@
       <workItem from="1539788196226" duration="155000" />
       <workItem from="1539788584713" duration="32000" />
       <workItem from="1539788746315" duration="5000" />
-      <workItem from="1539790267835" duration="13954000" />
+      <workItem from="1539790267835" duration="16676000" />
     </task>
     <servers />
   </component>
@@ -2000,7 +2006,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277851000" />
+    <option name="totallyTimeSpent" value="280573000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2015,7 +2021,7 @@
     <frame x="55" y="25" width="2505" height="1415" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4964438" visible="true" weight="0.1699878" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4964438" visible="true" weight="0.1699878" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -2038,7 +2044,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.3299611" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run Dashboard" order="15" sideWeight="0.49694997" visible="true" weight="0.50272375" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="15" sideWeight="0.49694997" visible="true" weight="0.50272375" />
       <window_info anchor="bottom" id="Database Console" order="16" sideWeight="0.49939" weight="0.3299611" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24847499" />
@@ -2109,13 +2115,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java</url>
-          <line>33</line>
+          <line>31</line>
           <properties />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java</url>
-          <line>48</line>
+          <line>49</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
@@ -2127,13 +2133,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/2.0.10.RELEASE/b7c6de4b7a506d67f608113b6ecf21091b927002/spring-data-commons-2.0.10.RELEASE-sources.jar!/org/springframework/data/repository/CrudRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/processor/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -2177,27 +2176,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1404#1405#0" expanded="true" />
             <element signature="e#1465#1466#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/SpeedingViolation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/EmissionViolation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-          <folding>
-            <element signature="e#1033#1034#0" expanded="true" />
-            <element signature="e#1124#1125#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2451,23 +2429,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/messages/CameraMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://5ef079cf-a9e6-4c13-8ef3-b7ce89786e3a/database/PROCESSOR/schema/PUBLIC/table/FINES">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -2482,6 +2443,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/files/extra_platen">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="44" lean-forward="true" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/LicensePlate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="das://5ef079cf-a9e6-4c13-8ef3-b7ce89786e3a/database/PROCESSOR/schema/PUBLIC/table/VIOLATION">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -2489,11 +2467,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/SpeedingViolation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="30" column="28" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/messages/CameraMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="14" selection-start-line="14" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/EmissionViolationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/files/speedviolation_test_camera_messages.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/Violation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+        <state relative-caret-position="272">
+          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
           <folding>
+            <element signature="e#222#227#0" />
+            <element signature="method#Violation#0;class#Violation#0" />
+            <element signature="method#Violation#1;class#Violation#0" />
+            <element signature="method#Violation#0;class#Violation#0" />
             <element signature="method#equals#0;class#Violation#0" />
           </folding>
         </state>
@@ -2502,37 +2521,25 @@
     <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/ViolationHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
-          <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/files/extra_platen">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/proxy/LicensePlate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-          <folding>
-            <element signature="e#2138#2139#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/files/speedviolation_test_camera_messages.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/service/violationservice/SpeedViolationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="54" column="21" lean-forward="true" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/files/camera_messages.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="51">
+          <caret line="3" column="16" lean-forward="true" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/models/violations/EmissionViolation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+          <folding>
+            <element signature="method#equals#0;class#EmissionViolation#0" />
+            <element signature="method#toString#0;class#EmissionViolation#0" />
+          </folding>
         </state>
       </provider>
     </entry>

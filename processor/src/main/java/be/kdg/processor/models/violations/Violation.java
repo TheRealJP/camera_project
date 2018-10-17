@@ -1,6 +1,7 @@
 package be.kdg.processor.models.violations;
 
 import be.kdg.processor.models.messages.CameraMessage;
+import be.kdg.processor.models.proxy.LicensePlate;
 import be.kdg.processor.models.proxy.Segment;
 import lombok.Data;
 
@@ -9,24 +10,33 @@ import java.util.Objects;
 
 @Data
 @Entity
-//@Table(name = "Violations")
+@Table(name = "Violations")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "VIOLATION_TYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Violation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    protected long id;
 
     @OneToOne(targetEntity = Segment.class, cascade = {CascadeType.ALL})
-    private Segment segment;
+    protected Segment segment;
 
     @OneToOne(targetEntity = CameraMessage.class, cascade = {CascadeType.ALL})
-    private CameraMessage message;
+    protected CameraMessage message;
 
-    @Column
-    private String licensePlate;
+    @OneToOne(targetEntity = LicensePlate.class)
+    protected LicensePlate licensePlate;
 
-    public Violation() {}
+    Violation() { }
+    Violation(CameraMessage cm, LicensePlate lp) {
+        this.licensePlate = lp;
+        this.message = cm;
+    }
+    Violation(Segment segment, CameraMessage cm, LicensePlate lp) {
+        this.segment = segment;
+        this.licensePlate = lp;
+        this.message = cm;
+    }
 
     @Override
     public boolean equals(Object o) {

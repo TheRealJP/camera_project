@@ -1,7 +1,9 @@
 package be.kdg.processor.models.violations;
 
+import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;
+import be.kdg.processor.models.proxy.Segment;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -19,7 +21,9 @@ public class SpeedingViolation extends Violation {
     @OneToOne(targetEntity = Camera.class)
     private Camera firstCamera;
 
-    public SpeedingViolation(int speed, LicensePlate lp, Camera firstCamera) {
+
+    public SpeedingViolation(int speed, LicensePlate lp, Camera firstCamera, CameraMessage cm, Segment segment) {
+        super(segment, cm, lp);
         this.speed = speed;
         this.firstCamera = firstCamera;
     }

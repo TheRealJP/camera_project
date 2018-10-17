@@ -3,15 +3,16 @@ package be.kdg.processor.service.violationservice;
 import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;
+import be.kdg.processor.models.proxy.Segment;
 import be.kdg.processor.models.violations.SpeedingViolation;
 import be.kdg.processor.service.proxyservice.ProxyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Collection;
+
 @Service
 //@Transactional //dwingt commit af
 public class SpeedViolationService implements ViolationService {
@@ -47,11 +48,14 @@ public class SpeedViolationService implements ViolationService {
 //                log.info("samelicenseplate " + sameLicensePlate);
 //                log.info(String.format("OtherCamera Found?: %s otherCamera: %s, otherCamera coupled to this message %s", otherCameraFound, otherCamera.getCameraId(), cm.getCameraId()));
                 if (otherCameraFound && sameLicensePlate) { //check if the message is about the same licenseplate AND the same other camera
+                    Segment segment = cam.getSegment();
                     int speed = calculateSpeed(cam.getSegment().getDistance(), cm, cm2);
                     int speedLimit = cam.getSegment().getSpeedLimit();
+
+                    log.info(String.format("speed: %d | speedlimit:%d", speed, speedLimit));
                     if (speed > speedLimit) { // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
                         log.info(String.format("Licenseplate %s will receive a speeding fine. speedlimit= %d, speed= %d)", lp.getPlateId(), speedLimit, speed));
-                        return new SpeedingViolation(speed, lp, cam);
+                        return new SpeedingViolation(speed, lp, cam, cm, segment);
                     }
                 }
             }
