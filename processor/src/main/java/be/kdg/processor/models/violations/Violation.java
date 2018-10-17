@@ -9,11 +9,10 @@ import java.util.Objects;
 
 @Data
 @Entity
-@Table(name = "Violations")
+//@Table(name = "Violations")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "VIOLATION_TYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Violation {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -27,8 +26,7 @@ public abstract class Violation {
     @Column
     private String licensePlate;
 
-    public Violation() {
-    }
+    public Violation() {}
 
     @Override
     public boolean equals(Object o) {

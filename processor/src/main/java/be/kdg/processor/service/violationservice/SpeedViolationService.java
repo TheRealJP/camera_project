@@ -7,10 +7,13 @@ import be.kdg.processor.models.violations.SpeedingViolation;
 import be.kdg.processor.service.proxyservice.ProxyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Collection;
-
+@Service
+//@Transactional //dwingt commit af
 public class SpeedViolationService implements ViolationService {
 
     private final Logger log = LoggerFactory.getLogger(SpeedViolationService.class);
@@ -28,26 +31,27 @@ public class SpeedViolationService implements ViolationService {
      */
 
     @Override
-    public SpeedingViolation checkViolation(Collection<CameraMessage> cameraMessages) throws IOException {
-        for (CameraMessage cm : cameraMessages) {
+    public SpeedingViolation checkViolation(CameraMessage cm, Collection<CameraMessage> cameraMessages) throws IOException {
+        Camera cam = proxyService.collectCamera(cm.getCameraId());
+        LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
 
-            Camera cam = proxyService.collectCamera(cm.getCameraId());
-            LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
+        if (cam.getSegment() != null) {
+            Camera otherCamera = proxyService.collectCamera(cam.getSegment().getConnectedCameraId());
+            log.info(String.format("\ncamera: %s\notherCamera: %s", cam, otherCamera));
+            // for each message, check if theres another message with the other camera cameraId and its about the same licenseplate
 
-            if (cam.getSegment() != null) {
-                Camera otherCamera = proxyService.collectCamera(cam.getSegment().getConnectedCameraId());
-                // for each message, check if theres another message with the other camera cameraId and its about the same licenseplate
-                for (CameraMessage cm2 : cameraMessages) {
-                    boolean sameLicensePlate = cm.getLicensePlate().equals(cm2.getLicensePlate());
-                    boolean otherCameraFound = otherCamera.getCameraId() == cm2.getCameraId();
+            for (CameraMessage cm2 : cameraMessages) {
+                boolean sameLicensePlate = cm.getLicensePlate().equals(cm2.getLicensePlate());
+                boolean otherCameraFound = otherCamera.getCameraId() == cm2.getCameraId();
 
-                    if (otherCameraFound && sameLicensePlate) { //check if the message is about the same licenseplate AND the same other camera
-                        int speed = calculateSpeed(cam.getSegment().getDistance(), cm, cm2);
-                        int speedLimit = cam.getSegment().getSpeedLimit();
-                        if (speed > speedLimit) { // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
-                            log.info(String.format("Licenseplate %s will receive a speeding fine. speedlimit= %d, speed= %d)", lp.getPlateId(), speedLimit, speed));
-                            return new SpeedingViolation(speed, lp, cam, otherCamera);
-                        }
+//                log.info("samelicenseplate " + sameLicensePlate);
+//                log.info(String.format("OtherCamera Found?: %s otherCamera: %s, otherCamera coupled to this message %s", otherCameraFound, otherCamera.getCameraId(), cm.getCameraId()));
+                if (otherCameraFound && sameLicensePlate) { //check if the message is about the same licenseplate AND the same other camera
+                    int speed = calculateSpeed(cam.getSegment().getDistance(), cm, cm2);
+                    int speedLimit = cam.getSegment().getSpeedLimit();
+                    if (speed > speedLimit) { // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
+                        log.info(String.format("Licenseplate %s will receive a speeding fine. speedlimit= %d, speed= %d)", lp.getPlateId(), speedLimit, speed));
+                        return new SpeedingViolation(speed, lp, cam);
                     }
                 }
             }

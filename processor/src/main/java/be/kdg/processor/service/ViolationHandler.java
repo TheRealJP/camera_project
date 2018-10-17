@@ -4,54 +4,62 @@ import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.models.violations.Violation;
 import be.kdg.processor.repositories.CameraMessageRepository;
 import be.kdg.processor.repositories.ViolationRepository;
+import be.kdg.processor.service.events.ConsumeEvent;
 import be.kdg.processor.service.fineservice.FineService;
 import be.kdg.processor.service.violationservice.ViolationService;
 import be.kdg.sa.services.CameraNotFoundException;
 import be.kdg.sa.services.LicensePlateNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Component
-public class ViolationHandler {
+@Transactional
+public class ViolationHandler implements ApplicationListener<ConsumeEvent> {
 
     private final Logger log = LoggerFactory.getLogger(ViolationHandler.class);
-    private final ViolationService violationService;
+    private final ArrayList<ViolationService> violationServices;
     private final FineService fineService;
-    private final CameraMessageRepository cmr; //TODO vervangen met service
+    private final CameraMessageRepository cmr;
     private final ViolationRepository violationRepository;
 
-    public ViolationHandler(ViolationService violationService, FineService fineService, CameraMessageRepository cmr, ViolationRepository violationRepository) {
-        this.violationService = violationService;
+    public ViolationHandler(ArrayList<ViolationService> violationServices, FineService fineService, CameraMessageRepository cmr, ViolationRepository violationRepository) {
+        this.violationServices = violationServices;
         this.fineService = fineService;
         this.cmr = cmr;
         this.violationRepository = violationRepository;
     }
 
-    public void handleViolations() {
+    /**
+     * nieuwe message komt binnen
+     * doorsturen naar checkviolation
+     * vergelijken met andere messages
+     */
+    @Override
+    public void onApplicationEvent(ConsumeEvent event) {
         try {
-            //TODO: elke minuut checken op overtredingen? of real time?
-            List<CameraMessage> cameraMessages = cmr.findAll();
+            CameraMessage cm = event.getCameraMessage();
+            cmr.save(cm);
 
+            Collection<CameraMessage> cameraMessages = cmr.findAll();
             if (cameraMessages.size() > 0) {
-                Violation violation = violationService.checkViolation(cameraMessages);
-                log.info("violation: " + violation.toString());
 
-                //check if violation already exists
-                Optional<Violation> existingViolation = Optional.ofNullable(violationRepository.getOne(violation.getId()));
-                if (!existingViolation.isPresent()) {
-                    log.info("making a fine");
-                    fineService.createAndSaveFine(violation);
+                for (ViolationService vs : violationServices) {
+                    Violation violation = vs.checkViolation(cm, cameraMessages);
+                    if (violation != null) {
+                        violationRepository.save(violation);
+                        fineService.createAndSaveFine(violation);
+                    }
                 }
             }
-
-        } catch (IOException | LicensePlateNotFoundException | CameraNotFoundException e) {
-            log.error(e.getMessage());
+        } catch (IOException | LicensePlateNotFoundException | CameraNotFoundException | NullPointerException e) {
+            log.error(String.format("cause of error: %s", e.getMessage()));
         }
     }
-
 }

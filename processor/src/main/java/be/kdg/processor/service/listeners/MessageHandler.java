@@ -9,8 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-@Component
-public class MessageHandler implements ApplicationListener<ConsumeEvent> {
+public class MessageHandler /*implements ApplicationListener<ConsumeEvent> */{
     private final Logger log = LoggerFactory.getLogger(MessageHandler.class);
     private final CameraMessageRepository cmr;
     private final ViolationHandler violationHandler;
@@ -25,12 +24,10 @@ public class MessageHandler implements ApplicationListener<ConsumeEvent> {
      * insert new row into database
      */
 
-    @Override
-    public void onApplicationEvent(ConsumeEvent event) {
-        CameraMessage cm = event.getCameraMessage();
-        cmr.save(cm);
-        log.info("saved new message: " + cm.toString());
-        violationHandler.handleViolations();
-    }
+//    public void onApplicationEvent(ConsumeEvent event) {
+//        CameraMessage cm = event.getCameraMessage();
+//        cmr.save(cm);
+//        log.info("saved new message: " + cm.toString());
+//    }
 }
 

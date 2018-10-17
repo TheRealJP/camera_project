@@ -1,5 +1,7 @@
 package be.kdg.processor.config;
 
+import be.kdg.processor.models.violations.EmissionViolation;
+import be.kdg.processor.models.violations.SpeedingViolation;
 import be.kdg.processor.service.proxyservice.ProxyService;
 import be.kdg.processor.service.violationservice.EmissionViolationService;
 import be.kdg.processor.service.violationservice.SpeedViolationService;
@@ -39,8 +41,8 @@ public class ViolationConfig {
     @Bean
     public ArrayList<ViolationService> violations() {
         ArrayList<ViolationService> violationServices = new ArrayList<>();
-        violationServices.add(0, new SpeedViolationService(proxyService()));
-        violationServices.add(1, new EmissionViolationService(proxyService()));
+        violationServices.add(0, new EmissionViolationService(proxyService()));
+        violationServices.add(1, new SpeedViolationService(proxyService()));
         return violationServices;
     }
 }

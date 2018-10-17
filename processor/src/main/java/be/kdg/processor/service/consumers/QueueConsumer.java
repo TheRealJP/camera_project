@@ -10,6 +10,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 //https://www.youtube.com/watch?v=ohL2HIBK1pg
 
 
@@ -21,7 +23,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RabbitListener(queues = "camera-queue")
 public class QueueConsumer implements Consumer {
-
     private static final Logger log = LoggerFactory.getLogger(QueueConsumer.class);
     private final MessageTransformer transformer;
     private final ApplicationEventPublisher applicationEventPublisher;

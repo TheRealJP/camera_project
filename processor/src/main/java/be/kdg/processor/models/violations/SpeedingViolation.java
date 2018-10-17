@@ -2,7 +2,6 @@ package be.kdg.processor.models.violations;
 
 import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;
-import be.kdg.processor.models.proxy.Location;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -19,14 +18,10 @@ public class SpeedingViolation extends Violation {
     private int speed;
     @OneToOne(targetEntity = Camera.class)
     private Camera firstCamera;
-    @OneToOne(targetEntity = Camera.class)
-    private Camera secondCamera;
 
-
-    public SpeedingViolation(int speed, LicensePlate lp, Camera firstCamera, Camera secondCamera) {
+    public SpeedingViolation(int speed, LicensePlate lp, Camera firstCamera) {
         this.speed = speed;
         this.firstCamera = firstCamera;
-        this.secondCamera = secondCamera;
     }
 
     @Override
@@ -36,13 +31,12 @@ public class SpeedingViolation extends Violation {
         if (!super.equals(o)) return false;
         SpeedingViolation that = (SpeedingViolation) o;
         return speed == that.speed &&
-                Objects.equals(firstCamera, that.firstCamera) &&
-                Objects.equals(secondCamera, that.secondCamera);
+                Objects.equals(firstCamera, that.firstCamera);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), speed, firstCamera, secondCamera);
+        return Objects.hash(super.hashCode(), speed, firstCamera);
     }
 
     @Override
@@ -51,7 +45,6 @@ public class SpeedingViolation extends Violation {
         return "SpeedingViolation{" +
                 "speed=" + speed +
                 ", firstCamera=" + firstCamera +
-                ", secondCamera=" + secondCamera +
                 '}';
     }
 }

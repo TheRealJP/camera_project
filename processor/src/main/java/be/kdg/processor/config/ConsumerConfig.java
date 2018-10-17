@@ -37,7 +37,4 @@ public class ConsumerConfig {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
-
-
-
 }
