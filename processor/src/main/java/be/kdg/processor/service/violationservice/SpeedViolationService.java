@@ -33,28 +33,25 @@ public class SpeedViolationService implements ViolationService {
      */
 
     @Override
-    public SpeedingViolation checkViolation(CameraMessage cm, Collection<CameraMessage> cameraMessages) throws IOException {
+    public SpeedingViolation checkViolation(CameraMessage cm, Collection<CameraMessage> cameraMessages) throws IOException, ArithmeticException {
         Camera cam = proxyService.collectCamera(cm.getCameraId());
         LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
 
         if (cam.getSegment() != null) {
             Camera otherCamera = proxyService.collectCamera(cam.getSegment().getConnectedCameraId());
-            log.info(String.format("\ncamera: %s\notherCamera: %s", cam, otherCamera));
-            // for each message, check if theres another message with the other camera cameraId and its about the same licenseplate
 
+            // for each message, check if theres another message with the other camera cameraId and its about the same licenseplate
             for (CameraMessage cm2 : cameraMessages) {
                 boolean sameLicensePlate = cm.getLicensePlate().equals(cm2.getLicensePlate());
                 boolean otherCameraFound = otherCamera.getCameraId() == cm2.getCameraId();
-
-//                log.info("samelicenseplate " + sameLicensePlate);
-//                log.info(String.format("OtherCamera Found?: %s otherCamera: %s, otherCamera coupled to this message %s", otherCameraFound, otherCamera.getCameraId(), cm.getCameraId()));
                 if (otherCameraFound && sameLicensePlate) { //check if the message is about the same licenseplate AND the same other camera
                     Segment segment = cam.getSegment();
                     int speed = calculateSpeed(cam.getSegment().getDistance(), cm, cm2);
                     int speedLimit = cam.getSegment().getSpeedLimit();
 
                     log.info(String.format("speed: %d | speedlimit:%d", speed, speedLimit));
-                    if (speed > speedLimit) { // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
+                    if (speed > speedLimit) {
+                        // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
                         log.info(String.format("Licenseplate %s will receive a speeding fine. speedlimit= %d, speed= %d)", lp.getPlateId(), speedLimit, speed));
                         return new SpeedingViolation(speed, speedLimit, lp, cam, cm, segment);
                     }
@@ -64,7 +61,7 @@ public class SpeedViolationService implements ViolationService {
         return null;
     }
 
-    private int calculateSpeed(int distance, CameraMessage firstMessage, CameraMessage secondMessage) {
+    private int calculateSpeed(int distance, CameraMessage firstMessage, CameraMessage secondMessage) throws ArithmeticException {
         int firstMessageTime = firstMessage.getDateTime().toLocalTime().toSecondOfDay();
         int secondMessageTime = secondMessage.getDateTime().toLocalTime().toSecondOfDay();
         int time = secondMessageTime - firstMessageTime;

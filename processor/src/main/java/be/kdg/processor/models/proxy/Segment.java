@@ -38,4 +38,36 @@ public class Segment {
                 ", speedLimit=" + speedLimit +
                 '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getConnectedCameraId() {
+        return connectedCameraId;
+    }
+
+    public void setConnectedCameraId(int connectedCameraId) {
+        this.connectedCameraId = connectedCameraId;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    public int getSpeedLimit() {
+        return speedLimit;
+    }
+
+    public void setSpeedLimit(int speedLimit) {
+        this.speedLimit = speedLimit;
+    }
 }

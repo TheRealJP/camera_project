@@ -35,6 +35,4 @@ public class EmissionViolationService implements ViolationService {
         }
         return null;
     }
-
-
 }

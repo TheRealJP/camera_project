@@ -10,8 +10,20 @@ import javax.persistence.*;
 @Table(name = "Fines")
 public class Fine {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //
+    private Long id;
+
+    @Column
+    private double finefactor;
+
+    @Column
+    private int speedLimit;
+
+    @Column
+    private int speed;
+
+    @Column
+    private boolean approved;
 
     @Column
     private double amount;

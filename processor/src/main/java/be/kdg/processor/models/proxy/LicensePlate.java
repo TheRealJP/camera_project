@@ -43,4 +43,36 @@ public class LicensePlate {
                 ", euroNumber=" + euroNumber +
                 '}';
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPlateId() {
+        return plateId;
+    }
+
+    public void setPlateId(String plateId) {
+        this.plateId = plateId;
+    }
+
+    public String getNationalNumber() {
+        return nationalNumber;
+    }
+
+    public void setNationalNumber(String nationalNumber) {
+        this.nationalNumber = nationalNumber;
+    }
+
+    public int getEuroNumber() {
+        return euroNumber;
+    }
+
+    public void setEuroNumber(int euroNumber) {
+        this.euroNumber = euroNumber;
+    }
 }

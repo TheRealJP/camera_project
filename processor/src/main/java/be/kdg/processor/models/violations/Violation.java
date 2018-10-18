@@ -4,6 +4,7 @@ import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;
 import be.kdg.processor.models.proxy.Segment;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,9 +15,10 @@ import java.util.Objects;
 @Table(name = "Violations")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "VIOLATION_TYPE", discriminatorType = DiscriminatorType.STRING)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) //kdg.processor.models.violations.Violation$$_jvstb57_0["handler"])
 public abstract class Violation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
     @OneToOne(targetEntity = Segment.class, cascade = {CascadeType.ALL})

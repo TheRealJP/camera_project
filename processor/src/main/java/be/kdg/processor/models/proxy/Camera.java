@@ -59,4 +59,44 @@ public class Camera {
                 ", euroNorm=" + euroNorm +
                 '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCameraId() {
+        return cameraId;
+    }
+
+    public void setCameraId(int cameraId) {
+        this.cameraId = cameraId;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Segment getSegment() {
+        return segment;
+    }
+
+    public void setSegment(Segment segment) {
+        this.segment = segment;
+    }
+
+    public int getEuroNorm() {
+        return euroNorm;
+    }
+
+    public void setEuroNorm(int euroNorm) {
+        this.euroNorm = euroNorm;
+    }
 }

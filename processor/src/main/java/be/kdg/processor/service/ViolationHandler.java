@@ -86,7 +86,7 @@ public class ViolationHandler implements ApplicationListener<ConsumeEvent> {
                     }
                 }
             }
-        } catch (IOException | LicensePlateNotFoundException | CameraNotFoundException | NullPointerException e) {
+        } catch (IOException | LicensePlateNotFoundException | CameraNotFoundException | NullPointerException | ArithmeticException e) {
             log.error(String.format("cause of error: %s", e.getMessage()));
         }
     }
