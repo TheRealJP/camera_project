@@ -19,20 +19,4 @@ public class FineDTO {
 
     public FineDTO() {
     }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public Violation getViolation() {
-        return violation;
-    }
-
-    public void setViolation(Violation violation) {
-        this.violation = violation;
-    }
 }

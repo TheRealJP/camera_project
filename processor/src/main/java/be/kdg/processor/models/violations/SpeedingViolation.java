@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @Data
 @Entity
-@DiscriminatorValue("speed")
+@DiscriminatorValue("speeding")
 public class SpeedingViolation extends Violation {
     @Column
     private final int speedLimit;

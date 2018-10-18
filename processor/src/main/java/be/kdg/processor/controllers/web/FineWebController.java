@@ -15,11 +15,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/fines")
 public class FineWebController {
-
     private final FineService fineService;
     private final ModelMapper modelMapper;
     private final FineDTOMapper fineDTOMapper;
-
 
     public FineWebController(FineService fineService, ModelMapper modelMapper, FineDTOMapper fineDTOMapper) {
         this.fineService = fineService;

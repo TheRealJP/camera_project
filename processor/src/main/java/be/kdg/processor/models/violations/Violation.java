@@ -33,10 +33,12 @@ public abstract class Violation {
     @OneToOne(targetEntity = LicensePlate.class, cascade = {CascadeType.ALL})
     protected LicensePlate licensePlate;
 
-
+    @Column(insertable = false, updatable = false)
+    protected String VIOLATION_TYPE;
 
     Violation() {
     }
+
 
     Violation(CameraMessage cm, LicensePlate lp, Camera cam) {
         this.licensePlate = lp;

@@ -22,8 +22,8 @@ public class FineService {
         this.fineRepository = fineRepository;
     }
 
-    public void createAndSaveFine(Violation violation) {
-        fineRepository.save(calculateFine(violation));
+    public Fine createAndSaveFine(Violation violation) {
+       return fineRepository.save(calculateFine(violation));
     }
 //
 //    public List<Fine> getFilteredFines(LocalDateTime startTime, LocalDateTime endTime) throws FineException{
@@ -76,7 +76,6 @@ public class FineService {
             fine.setAmount(fine.getFinefactor());
             fine.setViolation(ev);
         }
-
         return fine;
     }
 }
