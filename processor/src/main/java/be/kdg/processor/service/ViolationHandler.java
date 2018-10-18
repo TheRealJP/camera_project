@@ -1,6 +1,10 @@
 package be.kdg.processor.service;
 
 import be.kdg.processor.models.messages.CameraMessage;
+import be.kdg.processor.models.proxy.Camera;
+import be.kdg.processor.models.proxy.LicensePlate;
+import be.kdg.processor.models.proxy.Location;
+import be.kdg.processor.models.proxy.Segment;
 import be.kdg.processor.models.violations.Violation;
 import be.kdg.processor.repositories.*;
 import be.kdg.processor.service.events.ConsumeEvent;
@@ -63,14 +67,19 @@ public class ViolationHandler implements ApplicationListener<ConsumeEvent> {
                 for (ViolationService vs : violationServices) {
                     Violation violation = vs.checkViolation(cm, cameraMessages);
                     if (violation != null) {
-                        if (violation.getSegment() != null)
-                            segmentRepo.save(violation.getCam().getSegment());
-                        if (violation.getCam().getLocation() != null)
-                            locRepo.save(violation.getCam().getLocation());
-                        if (violation.getCam() != null)
-                            camRepo.save(violation.getCam());
+                        Segment segment = violation.getCam().getSegment();
+                        Location location = violation.getCam().getLocation();
+                        Camera cam = violation.getCam();
+                        LicensePlate licensePlate = violation.getLicensePlate();
+
+                        if (segment != null)
+                            segmentRepo.save(segment);
+                        if (location != null)
+                            locRepo.save(location);
+                        if (cam != null && location != null && segment != null)
+                            camRepo.save(cam);
                         if (violation.getLicensePlate() != null)
-                            lpRepo.save(violation.getLicensePlate());
+                            lpRepo.save(licensePlate);
 
                         violationRepository.save(violation);
                         fineService.createAndSaveFine(violation);

@@ -30,18 +30,6 @@ public class Segment {
         this.speedLimit = speedLimit;
     }
 
-    public int getConnectedCameraId() {
-        return connectedCameraId;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public int getSpeedLimit() {
-        return speedLimit;
-    }
-
     @Override
     public String toString() {
         return "Segment{" +

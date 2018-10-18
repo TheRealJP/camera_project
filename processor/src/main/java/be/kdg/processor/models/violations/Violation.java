@@ -31,6 +31,8 @@ public abstract class Violation {
     @OneToOne(targetEntity = LicensePlate.class, cascade = {CascadeType.ALL})
     protected LicensePlate licensePlate;
 
+
+
     Violation() {
     }
 
