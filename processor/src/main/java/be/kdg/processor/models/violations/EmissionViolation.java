@@ -2,8 +2,8 @@ package be.kdg.processor.models.violations;
 
 
 import be.kdg.processor.models.messages.CameraMessage;
+import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -22,9 +22,9 @@ public class EmissionViolation extends Violation {
     @Column
     private int licensePlateEuroNorm;
 
-    public EmissionViolation(int cameraEuroNorm, int licensePlateEuroNorm, LicensePlate licensePlate, CameraMessage cm) {
-        super(cm,licensePlate);
-        this.cameraEuroNorm = cameraEuroNorm;
+    public EmissionViolation(Camera cameraEuroNorm, int licensePlateEuroNorm, LicensePlate licensePlate, CameraMessage cm) {
+        super(cm, licensePlate,cameraEuroNorm);
+        this.cameraEuroNorm = cameraEuroNorm.getEuroNorm();
         this.licensePlateEuroNorm = licensePlateEuroNorm;
     }
 

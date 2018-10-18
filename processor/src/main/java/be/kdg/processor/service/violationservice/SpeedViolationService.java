@@ -20,6 +20,7 @@ public class SpeedViolationService implements ViolationService {
     private final Logger log = LoggerFactory.getLogger(SpeedViolationService.class);
     private final ProxyService proxyService;
 
+
     public SpeedViolationService(ProxyService proxyService) {
         this.proxyService = proxyService;
     }
@@ -55,7 +56,7 @@ public class SpeedViolationService implements ViolationService {
                     log.info(String.format("speed: %d | speedlimit:%d", speed, speedLimit));
                     if (speed > speedLimit) { // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
                         log.info(String.format("Licenseplate %s will receive a speeding fine. speedlimit= %d, speed= %d)", lp.getPlateId(), speedLimit, speed));
-                        return new SpeedingViolation(speed, lp, cam, cm, segment);
+                        return new SpeedingViolation(speed, speedLimit, lp, cam, cm, segment);
                     }
                 }
             }

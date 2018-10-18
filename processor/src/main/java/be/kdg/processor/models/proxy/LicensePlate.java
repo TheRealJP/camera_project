@@ -18,7 +18,9 @@ import javax.persistence.*;
 public class LicensePlate {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String plateId;
+    private Long id;
+    @Column
+    private String plateId; // convert from string to long
     @Column
     private String nationalNumber;
     @Column

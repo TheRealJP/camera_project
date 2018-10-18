@@ -26,7 +26,7 @@ public class FineService {
         if (violation instanceof SpeedingViolation) {
             SpeedingViolation sv = (SpeedingViolation) violation;
             fineFactor = 3;
-            double amount = sv.getSpeed() - sv.getFirstCamera().getSegment().getSpeedLimit() * fineFactor;
+            double amount = sv.getSpeed() - sv.getCam().getSegment().getSpeedLimit() * fineFactor;
             fine.setAmount(amount);
             fine.setViolation(sv);
 

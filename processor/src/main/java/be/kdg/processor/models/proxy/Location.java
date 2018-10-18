@@ -1,11 +1,13 @@
 package be.kdg.processor.models.proxy;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import lombok.Data;
 
 import javax.persistence.*;
 
 //"location":{"lat":51.203512,"long":4.437337}
 @Entity
+@Data
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

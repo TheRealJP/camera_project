@@ -9,7 +9,6 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import java.util.Objects;
 
 @Data
@@ -17,16 +16,16 @@ import java.util.Objects;
 @DiscriminatorValue("speed")
 public class SpeedingViolation extends Violation {
     @Column
+    private final int speedLimit;
+    @Column
     private int speed;
-    @OneToOne(targetEntity = Camera.class)
-    private Camera firstCamera;
 
-
-    public SpeedingViolation(int speed, LicensePlate lp, Camera firstCamera, CameraMessage cm, Segment segment) {
-        super(segment, cm, lp);
+    public SpeedingViolation(int speed, int speedLimit, LicensePlate lp, Camera firstCamera, CameraMessage cm, Segment segment) {
+        super(segment, cm, lp, firstCamera);
         this.speed = speed;
-        this.firstCamera = firstCamera;
+        this.speedLimit = speedLimit;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -34,21 +33,19 @@ public class SpeedingViolation extends Violation {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         SpeedingViolation that = (SpeedingViolation) o;
-        return speed == that.speed &&
-                Objects.equals(firstCamera, that.firstCamera);
+        return speedLimit == that.speedLimit &&
+                speed == that.speed;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), speed, firstCamera);
+        return Objects.hash(super.hashCode(), speedLimit, speed);
     }
 
     @Override
     public String
     toString() {
         return "SpeedingViolation{" +
-                "speed=" + speed +
-                ", firstCamera=" + firstCamera +
-                '}';
+                "speed=" + speed + '}';
     }
 }

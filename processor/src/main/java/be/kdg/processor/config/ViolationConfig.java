@@ -1,7 +1,5 @@
 package be.kdg.processor.config;
 
-import be.kdg.processor.models.violations.EmissionViolation;
-import be.kdg.processor.models.violations.SpeedingViolation;
 import be.kdg.processor.service.proxyservice.ProxyService;
 import be.kdg.processor.service.violationservice.EmissionViolationService;
 import be.kdg.processor.service.violationservice.SpeedViolationService;

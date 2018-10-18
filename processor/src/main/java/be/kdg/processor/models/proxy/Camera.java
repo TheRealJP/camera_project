@@ -1,17 +1,26 @@
 package be.kdg.processor.models.proxy;
 // {"cameraId":4,"location":{"lat":51.203512,"long":4.437337},"segment":{"connectedCameraId":5,"distance":550,"speedLimit":50},"euroNorm":3}
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 public class Camera {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column
     private int cameraId;
+
     @OneToOne(targetEntity = Location.class)
     private Location location;
+
     @OneToOne(targetEntity = Segment.class)
     private Segment segment;
+
     @Column
     private int euroNorm;
 
@@ -39,22 +48,6 @@ public class Camera {
         this.location = location;
         this.segment = segment;
         this.euroNorm = euroNorm;
-    }
-
-    public int getCameraId() {
-        return cameraId;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public Segment getSegment() {
-        return segment;
-    }
-
-    public int getEuroNorm() {
-        return euroNorm;
     }
 
     @Override

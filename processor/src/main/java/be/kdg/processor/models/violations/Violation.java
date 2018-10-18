@@ -1,6 +1,7 @@
 package be.kdg.processor.models.violations;
 
 import be.kdg.processor.models.messages.CameraMessage;
+import be.kdg.processor.models.proxy.Camera;
 import be.kdg.processor.models.proxy.LicensePlate;
 import be.kdg.processor.models.proxy.Segment;
 import lombok.Data;
@@ -24,18 +25,26 @@ public abstract class Violation {
     @OneToOne(targetEntity = CameraMessage.class, cascade = {CascadeType.ALL})
     protected CameraMessage message;
 
-    @OneToOne(targetEntity = LicensePlate.class)
+    @OneToOne(targetEntity = Camera.class, cascade = {CascadeType.ALL})
+    protected Camera cam;
+
+    @OneToOne(targetEntity = LicensePlate.class, cascade = {CascadeType.ALL})
     protected LicensePlate licensePlate;
 
-    Violation() { }
-    Violation(CameraMessage cm, LicensePlate lp) {
+    Violation() {
+    }
+
+    Violation(CameraMessage cm, LicensePlate lp, Camera cam) {
         this.licensePlate = lp;
         this.message = cm;
+        this.cam = cam;
     }
-    Violation(Segment segment, CameraMessage cm, LicensePlate lp) {
+
+    Violation(Segment segment, CameraMessage cm, LicensePlate lp, Camera cam) {
         this.segment = segment;
         this.licensePlate = lp;
         this.message = cm;
+        this.cam = cam;
     }
 
     @Override
@@ -46,11 +55,12 @@ public abstract class Violation {
         return id == violation.id &&
                 Objects.equals(segment, violation.segment) &&
                 Objects.equals(message, violation.message) &&
+                Objects.equals(cam, violation.cam) &&
                 Objects.equals(licensePlate, violation.licensePlate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, segment, message, licensePlate);
+        return Objects.hash(id, segment, message, cam, licensePlate);
     }
 }
