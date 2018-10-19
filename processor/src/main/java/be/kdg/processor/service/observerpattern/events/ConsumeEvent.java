@@ -1,4 +1,4 @@
-package be.kdg.processor.service.events;
+package be.kdg.processor.service.observerpattern.events;
 
 import be.kdg.processor.models.messages.CameraMessage;
 import org.springframework.context.ApplicationEvent;

@@ -1,7 +1,7 @@
 package be.kdg.processor.service.consumers;
 
 import be.kdg.processor.models.messages.CameraMessage;
-import be.kdg.processor.service.events.ConsumeEvent;
+import be.kdg.processor.service.observerpattern.events.ConsumeEvent;
 import be.kdg.processor.service.transformers.MessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +9,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
 
 //https://www.youtube.com/watch?v=ohL2HIBK1pg
 

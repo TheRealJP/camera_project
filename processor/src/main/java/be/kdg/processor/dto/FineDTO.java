@@ -16,6 +16,7 @@ public class FineDTO {
     private int speedLimit;
     private double finefactor;
     private int speed;
+    private boolean approved;
 
     public FineDTO() {
     }

@@ -1,13 +1,9 @@
-package be.kdg.processor.service.listeners;
+package be.kdg.processor.service.observerpattern.listeners;
 
-import be.kdg.processor.models.messages.CameraMessage;
 import be.kdg.processor.repositories.CameraMessageRepository;
 import be.kdg.processor.service.ViolationHandler;
-import be.kdg.processor.service.events.ConsumeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
 
 public class MessageHandler /*implements ApplicationListener<ConsumeEvent> */{
     private final Logger log = LoggerFactory.getLogger(MessageHandler.class);

@@ -1,7 +1,6 @@
-package be.kdg.processor.service.publishers;
+package be.kdg.processor.service.observerpattern.publishers;
 
 
-import be.kdg.processor.models.messages.CameraMessage;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Component;

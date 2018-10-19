@@ -39,6 +39,9 @@ dependencies {
     compile('com.h2database:h2')
     compileOnly('org.projectlombok:lombok')
     compile 'org.modelmapper.extensions:modelmapper-spring:2.3.0'
+    compile('org.webjars:webjars-locator-core:0.35')
+    compile('org.webjars:bootstrap:4.1.3')
+    compile('org.webjars:jquery:3.0.0')
 
     // Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'

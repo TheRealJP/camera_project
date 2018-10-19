@@ -36,7 +36,6 @@ public class FineRestController {
         this.fineDTOMapper = fineDTOMapper;
     }
 
-
     @GetMapping(value = "/fines/{id}", produces = MediaType.APPLICATION_JSON_VALUE) //append aan /api
     public ResponseEntity<FineDTO> getFine(@PathVariable Long id) throws FineException {
         Fine fine = fineService.get(id);
@@ -49,29 +48,10 @@ public class FineRestController {
         return new ResponseEntity<>(fineDTOMapper.toFineDTOList(fines), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/fines", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FineDTO> createGreeting(@RequestBody FineDTO fineDTO) {
-        Fine fineIn = modelMapper.map(fineDTO, Fine.class);
-        Fine fineOut = fineService.save(fineIn);
-        return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.CREATED);
-    }
-
     @PutMapping(path = "/fines/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FineDTO> putApproveFine(@PathVariable Long id, @RequestParam("approved")boolean approved) throws FineException {
+    public ResponseEntity<FineDTO> putApproveFine(@PathVariable Long id, @RequestParam("approved") boolean approved) throws FineException {
         Fine fine = fineService.setApproveFine(id, approved);
         Fine fineOut = fineService.save(fine);
         return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.ACCEPTED);
     }
-
-//    @GetMapping(path = "/fines/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<FineDTO>> loadFilteredFines(
-//            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
-//            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime)
-//            throws FineException {
-//
-//        List<Fine> fines = fineService.getFilteredFines(startTime, endTime);
-//        return new ResponseEntity<>(fineDTOMapper.toFineDTOList(fines) , HttpStatus.OK);
-//    }
-
-
 }

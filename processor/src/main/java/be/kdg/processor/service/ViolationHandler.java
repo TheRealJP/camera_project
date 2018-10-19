@@ -7,7 +7,7 @@ import be.kdg.processor.models.proxy.Location;
 import be.kdg.processor.models.proxy.Segment;
 import be.kdg.processor.models.violations.Violation;
 import be.kdg.processor.repositories.*;
-import be.kdg.processor.service.events.ConsumeEvent;
+import be.kdg.processor.service.observerpattern.events.ConsumeEvent;
 import be.kdg.processor.service.fineservice.FineService;
 import be.kdg.processor.service.violationservice.ViolationService;
 import be.kdg.sa.services.CameraNotFoundException;
