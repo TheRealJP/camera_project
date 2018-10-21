@@ -54,4 +54,14 @@ public class FineRestController {
         Fine fineOut = fineService.save(fine);
         return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.ACCEPTED);
     }
+
+    @GetMapping(path = "/fines/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FineDTO>> loadFilteredFines(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) throws FineException {
+
+        List<Fine> fines = fineService.getFilteredFines(startTime, endTime);
+        return new ResponseEntity<>(fineDTOMapper.toFineDTOList(fines), HttpStatus.OK);
+    }
+
 }

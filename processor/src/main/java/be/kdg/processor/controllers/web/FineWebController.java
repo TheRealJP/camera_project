@@ -25,9 +25,10 @@ public class FineWebController {
         this.fineDTOMapper = fineDTOMapper;
     }
 
-    @GetMapping("/fines.do") //******.do
-    public ModelAndView showFines() throws FineException {
+    @GetMapping("/finefactors.do") //******.do
+    public ModelAndView showFineFactors() throws FineException {
+
         List<FineDTO> fineDTOList = fineDTOMapper.toFineDTOList(fineService.getAll());
-        return new ModelAndView("finesummary", "fineDTOS", fineDTOList);
+        return new ModelAndView("finefactorsummary", "fineDTOS", fineDTOList);
     }
 }

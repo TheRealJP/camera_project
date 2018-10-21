@@ -9,6 +9,7 @@ import be.kdg.processor.repositories.FineRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,15 +26,15 @@ public class FineService {
     public Fine createAndSaveFine(Violation violation) {
        return fineRepository.save(calculateFine(violation));
     }
-//
-//    public List<Fine> getFilteredFines(LocalDateTime startTime, LocalDateTime endTime) throws FineException{
-//        List<Fine> optionalFineList = fineRepository.findAllByViolationCameraMessageTimestampBetween(startTime, endTime);
-//
-//        if (optionalFineList.size() > 0)
-//            return optionalFineList;
-//
-//        throw new FineException("Fines list not found");
-//    }
+
+    public List<Fine> getFilteredFines(LocalDateTime startTime, LocalDateTime endTime) throws FineException{
+        List<Fine> optionalFineList = fineRepository.findAllByViolation_Message_DateTimeBetween(startTime, endTime);
+
+        if (optionalFineList.size() > 0)
+            return optionalFineList;
+
+        throw new FineException("Fines list not found");
+    }
 
     public Fine save(Fine fine) {
         return fineRepository.save(fine);
