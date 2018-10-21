@@ -189,7 +189,7 @@
     <session id="1780882695">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="35" />
+          <entry key="project.closed" value="36" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.10" value="4" />
@@ -2081,13 +2081,6 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BaseApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="base" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="be.kdg.base.BaseApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
