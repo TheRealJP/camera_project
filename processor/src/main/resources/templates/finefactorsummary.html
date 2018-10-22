@@ -19,17 +19,14 @@
                 <div class="panel-heading"><h5>Boetefactor overzicht</h5></div>
                 <div class="panel-body">
                     <table class="table">
-                        <th>
-                            <tr>
-                                <td th:text="snelheid">$</td>
-                                <td th:text="snelheidlimiet">$</td>
-                                <td th:text="boetefactor ${fineDTO.VIOLATION_TYPE}$">$</td>
-                            </tr>
-                            <tr th:each="fineDTO: ${fineDTOS}">
-                                <td th:text="${fineDTO.finefactor}">$</td>
-                                <td th:text="${fineDTO.violation.VIOLATION_TYPE}">$</td>
-                            </tr>
-                        </th>
+                        <tr>
+                            <td>ViolationType</td>
+                            <td>Factor</td>
+                        </tr>
+                        <tr th:each="fineFactorDTO: ${fineFactorDTOS}">
+                            <td  th:text="${fineFactorDTO.violationType}">$</td>
+                            <td th:text="${fineFactorDTO.factor}">$</td>
+                        </tr>
                     </table>
 
                 </div>

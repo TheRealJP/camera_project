@@ -1,5 +1,6 @@
 package be.kdg.processor.fine.config;
 
+import be.kdg.processor.fine.repositories.FineFactorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +20,6 @@ public class FineWebConfig implements WebMvcConfigurer { //sinds java8 dit gebru
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
+
 }
