@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="icon" href="/images/favicon.ico">
@@ -24,7 +24,7 @@
                             <td>Factor</td>
                         </tr>
                         <tr th:each="fineFactorDTO: ${fineFactorDTOS}">
-                            <td  th:text="${fineFactorDTO.violationType}">$</td>
+                            <td th:text="${fineFactorDTO.violationType}">$</td>
                             <td th:text="${fineFactorDTO.factor}">$</td>
                         </tr>
                     </table>
