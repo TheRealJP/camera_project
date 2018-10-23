@@ -23,13 +23,9 @@ public class EmissionViolationListener implements ApplicationListener<ConsumeEve
 
     @Override
     public void onApplicationEvent(ConsumeEvent event) {
-        try {
-            EmissionViolation emissionViolation = emissionViolationService.checkViolation(event);
-            if (emissionViolation != null)
-                fineService.createAndSaveFine(emissionViolation);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        EmissionViolation emissionViolation = emissionViolationService.checkViolation(event);
+        if (emissionViolation != null)
+            fineService.createAndSaveFine(emissionViolation);
 
     }
 }

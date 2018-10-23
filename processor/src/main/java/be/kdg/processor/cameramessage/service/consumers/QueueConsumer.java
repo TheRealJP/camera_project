@@ -1,12 +1,15 @@
 package be.kdg.processor.cameramessage.service.consumers;
 
 import be.kdg.processor.cameramessage.models.CameraMessage;
+import be.kdg.processor.cameramessage.repositories.CameraMessageRepository;
+import be.kdg.processor.cameramessage.service.transformers.MessageTransformer;
 import be.kdg.processor.proxy.models.Camera;
 import be.kdg.processor.proxy.models.LicensePlate;
-import be.kdg.processor.cameramessage.repositories.CameraMessageRepository;
-import be.kdg.processor.violation.observerpattern.events.ConsumeEvent;
 import be.kdg.processor.proxy.service.ProxyService;
-import be.kdg.processor.cameramessage.service.transformers.MessageTransformer;
+import be.kdg.processor.violation.observerpattern.events.ConsumeEvent;
+import be.kdg.sa.services.CameraNotFoundException;
+import be.kdg.sa.services.InvalidLicensePlateException;
+import be.kdg.sa.services.LicensePlateNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -15,8 +18,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
-//https://www.youtube.com/watch?v=ohL2HIBK1pg
 
 
 /**
@@ -41,13 +42,16 @@ public class QueueConsumer implements Consumer {
     }
 
     @RabbitHandler
-    public void consume(String in) throws IOException {
-        CameraMessage cm = (CameraMessage) transformer.transformMessage(in); //transforms xml to cameramessage object
-        Camera camera = proxyService.collectCamera(cm.getCameraId());
-        LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
-        cmr.save(cm);
-
-        applicationEventPublisher.publishEvent(new ConsumeEvent(this, cm, camera, lp));
+    public void consume(String in) {
+        try {
+            CameraMessage cm = (CameraMessage) transformer.transformMessage(in);
+            cmr.save(cm);
+            Camera camera = proxyService.collectCamera(cm.getCameraId());
+            LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
+            applicationEventPublisher.publishEvent(new ConsumeEvent(this, cm, camera, lp));
+        } catch (IOException | LicensePlateNotFoundException | InvalidLicensePlateException | CameraNotFoundException e) {
+            log.warn(e.getMessage());
+        }
     }
 
 }

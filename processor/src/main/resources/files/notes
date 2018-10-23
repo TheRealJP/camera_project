@@ -4,3 +4,17 @@ CORE:
     lombok
     devtools
     validation
+
+
+//-10-05 11:44:12.646  INFO 16456 --- [cTaskExecutor-1] b.k.p.service.CameraServiceUtility       : {"plateId":"4-ABC-123","nationalNumber":"69.05.22-123.4","euroNumber":4}
+//        2018-10-05 11:44:12.646  INFO 16456 --- [cTaskExecutor-1] b.k.p.messaging.consumers.QueueConsumer  : Message received:  1, 4-ABC-123, 2018-10-05T11:44:00.588247
+//        2018-10-05 11:44:12.858  INFO 16456 --- [cTaskExecutor-1] b.k.p.service.CameraServiceUtility       : {"plateId":"1-ABC-123","nationalNumber":"69.05.22-123.1","euroNumber":1}
+//        2018-10-05 11:44:12.858  INFO 16456 --- [cTaskExecutor-1] b.k.p.messaging.consumers.QueueConsumer  : Message received:  3, 1-ABC-123, 2018-10-05T11:44:01.588247
+//        2018-10-05 11:44:13.062  INFO 16456 --- [cTaskExecutor-1] b.k.p.service.CameraServiceUtility       : {"plateId":"2-ABC-123","nationalNumber":"69.05.22-123.2","euroNumber":2}
+//        2018-10-05 11:44:13.062  INFO 16456 --- [cTaskExecutor-1] b.k.p.messaging.consumers.QueueConsumer  : Message received:  4, 2-ABC-123, 2018-10-05T11:44:01.688247
+//        2018-10-05 11:44:13.270  INFO 16456 --- [cTaskExecutor-1] b.k.p.messaging.consumers.QueueConsumer  : Message received:  5, 2-ABC-123, 2018-10-05T11:44:03.688247
+//        2018-10-05 11:44:13.474  INFO 16456 --- [cTaskExecutor-1] b.k.p.service.CameraServiceUtility       : {"plateId":"4-ABC-123","nationalNumber":"69.05.22-123.4","euroNumber":4}
+
+
+//"location":{"lat":51.203512,"long":4.437337}
+//segment":{"connectedCameraId":5,"distance":550,"speedLimit":50

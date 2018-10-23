@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @Component
 public class SpeedViolationListener implements ApplicationListener<ConsumeEvent> {
-
     private final FineService fineService;
     private final SpeedViolationService speedViolationService;
 
@@ -21,8 +20,6 @@ public class SpeedViolationListener implements ApplicationListener<ConsumeEvent>
         this.speedViolationService = speedViolationService;
     }
 
-    // generieke methode om alle services te includen
-    // elke listener gebruikt dezelfde code
     @Override
     public void onApplicationEvent(ConsumeEvent event) {
         try {

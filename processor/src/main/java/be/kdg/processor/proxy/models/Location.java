@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-//"location":{"lat":51.203512,"long":4.437337}
 @Data
 public class Location {
     private int id;
@@ -20,14 +19,6 @@ public class Location {
     public Location(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
     }
 
     @Override

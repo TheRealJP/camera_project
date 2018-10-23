@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "Fines")
 public class Fine {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private boolean approved;
@@ -30,9 +30,6 @@ public class Fine {
     private int speedLimit;
     @Column
     private int speed;
-
-//    @OneToOne(targetEntity = Violation.class, fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-//    private Violation violation;
 
     public Fine() {
     }

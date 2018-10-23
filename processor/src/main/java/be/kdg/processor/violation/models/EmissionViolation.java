@@ -8,7 +8,6 @@ import lombok.Data;
 
 import java.util.Objects;
 
-//https://hibernate.atlassian.net/browse/HHH-12414
 @Data
 public class EmissionViolation extends Violation {
     private int cameraEuroNorm;

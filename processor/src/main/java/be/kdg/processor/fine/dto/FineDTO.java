@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-//@NoArgsConstructor //data via 't web json --> automatisch omzetten naar een object
 @Data
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitiali²zer", "handler"})
 public class FineDTO {
     private int amount;
     private Violation violation;

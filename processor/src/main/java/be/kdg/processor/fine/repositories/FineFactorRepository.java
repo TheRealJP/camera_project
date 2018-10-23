@@ -1,6 +1,5 @@
 package be.kdg.processor.fine.repositories;
 
-import be.kdg.processor.fine.models.Fine;
 import be.kdg.processor.fine.models.FineFactor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
