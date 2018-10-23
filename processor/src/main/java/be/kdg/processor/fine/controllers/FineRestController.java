@@ -1,7 +1,7 @@
 package be.kdg.processor.fine.controllers;
 
 import be.kdg.processor.fine.dto.FineDTO;
-import be.kdg.processor.fine.dto.FineDTOMapper;
+import be.kdg.processor.fine.service.FineDTOMapper;
 import be.kdg.processor.fine.exceptions.FineException;
 import be.kdg.processor.fine.models.Fine;
 import be.kdg.processor.fine.service.FineService;

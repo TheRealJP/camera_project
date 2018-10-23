@@ -1,5 +1,7 @@
-package be.kdg.processor.fine.dto;
+package be.kdg.processor.fine.service;
 
+import be.kdg.processor.fine.dto.FineDTO;
+import be.kdg.processor.fine.dto.FineFactorDTO;
 import be.kdg.processor.fine.models.Fine;
 import be.kdg.processor.fine.models.FineFactor;
 import org.modelmapper.ModelMapper;

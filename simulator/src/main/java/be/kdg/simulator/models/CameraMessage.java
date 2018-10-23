@@ -35,7 +35,6 @@ public class CameraMessage {
     }
 
     @Override
-    //TODO: tijd en datum terug samen om parsen makkelijker te maken
     public String toString() {
         return String.format("%2d, %s, %s", cameraId,
                 licensePlate,

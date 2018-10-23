@@ -11,10 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.anyOf;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.util.Assert.isInstanceOf;
 
 @RunWith(SpringRunner.class)
@@ -26,7 +23,12 @@ public class SimulatorApplicationTests {
 
     @Test
     public void contextLoads() {
-        CameraMessage cameraMessage = messageGenerator.generateCameraMessage();
+        CameraMessage cameraMessage = null;
+        try {
+            cameraMessage = messageGenerator.generateCameraMessage();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         assertThat(cameraMessage.getLicensePlate(), Matchers.matchesPattern("^1-\\w{3}-\\d{3}$"));
         assertThat(cameraMessage, Matchers.notNullValue());

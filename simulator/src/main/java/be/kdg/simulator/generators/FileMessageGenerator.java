@@ -22,10 +22,10 @@ import static java.nio.file.Files.lines;
 @ConditionalOnProperty(name = "generator.type", havingValue = "file")
 public class FileMessageGenerator implements MessageGenerator {
 
-    @Value("${file.path}")
-    private String filepath;
     private static final Logger log = LoggerFactory.getLogger(FileMessageGenerator.class);
     private final ResourceLoader resourceLoader;
+    @Value("${file.path}")
+    private String filepath;
     private int fileLineCounter = 0;
 
     public FileMessageGenerator(ResourceLoader resourceLoader) {
@@ -43,21 +43,23 @@ public class FileMessageGenerator implements MessageGenerator {
      */
     private CameraMessage collectMessage() {
         Resource resource = resourceLoader.getResource(filepath); //${file.path} werkt niet
+
         Supplier<Stream<String>> lines = () -> {
             try {
                 return lines(Paths.get(resource.getFile().getPath()));
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warn(e.getMessage());
             }
             return null;
         };
 
         if (fileLineCounter >= lines.get().count()) return null;
+
         String line = lines.get().skip(fileLineCounter++).findFirst().get();
-        log.info("count: " + fileLineCounter);
         LocalDateTime currentTime = LocalDateTime.now();
         String[] split = line.split(",");
         currentTime = currentTime.plus(Long.parseLong(split[2].trim()), ChronoField.MILLI_OF_DAY.getBaseUnit());
+
         return new CameraMessage(Integer.parseInt(split[0]), currentTime, split[1]);
     }
 }

@@ -26,13 +26,9 @@ public class QueueMessenger implements Messenger {
     }
 
     @Override
-    public void sendMessage(CameraMessage message) {
-        try {
-            String parsedCameraMessage = (String) transformer.transformMessage(message);
-            template.convertAndSend(queue.getName(), parsedCameraMessage);
-            log.info('\n' + parsedCameraMessage);
-        } catch (AmqpException e) {
-            log.error(e.getMessage());
-        }
+    public void sendMessage(CameraMessage message) throws AmqpException {
+        String parsedCameraMessage = (String) transformer.transformMessage(message);
+        template.convertAndSend(queue.getName(), parsedCameraMessage);
+        log.info('\n' + parsedCameraMessage);
     }
 }

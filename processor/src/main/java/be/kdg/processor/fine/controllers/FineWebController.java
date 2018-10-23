@@ -1,6 +1,6 @@
 package be.kdg.processor.fine.controllers;
 
-import be.kdg.processor.fine.dto.FineDTOMapper;
+import be.kdg.processor.fine.service.FineDTOMapper;
 import be.kdg.processor.fine.dto.FineFactorDTO;
 import be.kdg.processor.fine.service.FineFactorService;
 import be.kdg.processor.fine.service.FineService;
