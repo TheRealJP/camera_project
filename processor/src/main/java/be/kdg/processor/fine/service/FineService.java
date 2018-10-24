@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional //dwingt commit af
+@Transactional
 public class FineService {
     private final FineRepository fineRepository;
     private final FineFactorRepository ffRepo;

@@ -28,18 +28,6 @@ public class UserWebController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/login") //******.do
-    public ModelAndView loginuser(@ModelAttribute UserDTO userDTO) throws UserNotFoundException {
-//        User user = modelMapper.map(userDTO, User.class);
-        if (!userService.getUser(userDTO.getId()).isPresent()) {
-            return new ModelAndView("loginpage");
-//            throw new UserNotFoundException("User not found");
-        }
-
-        return new ModelAndView("start");
-    }
-
-
     // Login form
     @RequestMapping("/loginpage")
     public String login() {
@@ -51,11 +39,6 @@ public class UserWebController {
     public String loginError(UserDTO userDTO, Model model) {
         model.addAttribute("loginError", true);
         return "login.html";
-    }
-
-    @PostMapping("/login")
-    public ModelAndView showLogin() {
-        return new ModelAndView("loginpage");
     }
 
 }

@@ -1,10 +1,8 @@
 package be.kdg.processor.fine.controllers;
 
-import be.kdg.processor.fine.service.FineDTOMapper;
 import be.kdg.processor.fine.dto.FineFactorDTO;
+import be.kdg.processor.fine.service.FineDTOMapper;
 import be.kdg.processor.fine.service.FineFactorService;
-import be.kdg.processor.fine.service.FineService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +13,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/fines")
 public class FineWebController {
-    private final FineService fineService;
     private final FineFactorService ffService;
-    private final ModelMapper modelMapper;
     private final FineDTOMapper fineDTOMapper;
 
-    public FineWebController(FineService fineService, FineFactorService ffService, ModelMapper modelMapper, FineDTOMapper fineDTOMapper) {
-        this.fineService = fineService;
+    public FineWebController(FineFactorService ffService, FineDTOMapper fineDTOMapper) {
         this.ffService = ffService;
-        this.modelMapper = modelMapper;
         this.fineDTOMapper = fineDTOMapper;
     }
 

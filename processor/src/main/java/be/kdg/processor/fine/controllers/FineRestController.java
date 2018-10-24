@@ -1,9 +1,9 @@
 package be.kdg.processor.fine.controllers;
 
 import be.kdg.processor.fine.dto.FineDTO;
-import be.kdg.processor.fine.service.FineDTOMapper;
 import be.kdg.processor.fine.exceptions.FineException;
 import be.kdg.processor.fine.models.Fine;
+import be.kdg.processor.fine.service.FineDTOMapper;
 import be.kdg.processor.fine.service.FineService;
 import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,8 +22,7 @@ import java.util.List;
  * ○ aanpassen van boetebedrag met motivering (bv. na een gerechtelijke procedure)
  */
 
-//DTO nodig omdat de frontend niet constant moet aangepast worden
-@RestController //= @Controller + @Responsebody
+@RestController // == @Controller + @Responsebody
 @RequestMapping("/api")
 public class FineRestController {
     private final FineService fineService;
@@ -36,14 +35,14 @@ public class FineRestController {
         this.fineDTOMapper = fineDTOMapper;
     }
 
-    @GetMapping(value = "/fines/{id}", produces = MediaType.APPLICATION_JSON_VALUE) //append aan /api
+    @GetMapping(value = "/fines/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FineDTO> getFine(@PathVariable Long id) throws FineException {
         Fine fine = fineService.get(id);
         return new ResponseEntity<>(modelMapper.map(fine, FineDTO.class), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/fines", produces = MediaType.APPLICATION_JSON_VALUE) //alle fines
-    public ResponseEntity<List<FineDTO>> getFines() throws FineException {
+    @GetMapping(value = "/fines", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FineDTO>> getFines() {
         List<Fine> fines = fineService.getAll();
         return new ResponseEntity<>(fineDTOMapper.toFineDTOList(fines), HttpStatus.OK);
     }
