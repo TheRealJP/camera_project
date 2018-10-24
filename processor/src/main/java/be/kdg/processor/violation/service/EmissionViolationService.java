@@ -14,10 +14,9 @@ public class EmissionViolationService implements ViolationService {
 
     @Override
     public EmissionViolation checkViolation(ConsumeEvent event) {
-        // TODO: checken op nummerplaat in de gequery'de messages of deze recent al een boete heeft gekregen en of deze binnen dat timeframe valt
-        //TODO: query schrijven om berichten op te halen tov vorige dag
         Camera cam = event.getCamera();
         LicensePlate lp = event.getLp();
+
 
         if (cam.getEuroNorm() > lp.getEuroNumber()) {
             log.info(String.format("Licenseplate %s will receive a emission fine. cameraNorm=%d, carNorm=%d)", lp.getPlateId(), cam.getEuroNorm(), lp.getEuroNumber()));
