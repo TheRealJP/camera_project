@@ -1,7 +1,7 @@
 package be.kdg.processor.violation.observerpattern.listeners;
 
-import be.kdg.processor.violation.models.SpeedingViolation;
 import be.kdg.processor.fine.service.FineService;
+import be.kdg.processor.violation.models.SpeedingViolation;
 import be.kdg.processor.violation.observerpattern.events.ConsumeEvent;
 import be.kdg.processor.violation.service.SpeedViolationService;
 import org.springframework.context.ApplicationListener;
@@ -26,7 +26,7 @@ public class SpeedViolationListener implements ApplicationListener<ConsumeEvent>
             SpeedingViolation speedingViolation = speedViolationService.checkViolation(event);
             if (speedingViolation != null)
                 fineService.createAndSaveFine(speedingViolation);
-        } catch (IOException e) {
+        } catch (IOException | ArithmeticException e) {
             e.printStackTrace();
         }
     }

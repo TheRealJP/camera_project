@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <head>
         <link rel="icon" href="/images/favicon.ico">
@@ -12,26 +12,43 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
         <meta charset="UTF-8">
         <title>Welkom op onze boete pagina </title>
-
     </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h5>Welkom op onze boete Website</h5><img src="../images/favicon.ico"></div>
-                <div sec:authorize="isAuthenticated()">
-                    <div class="panel-body">
-                        <p>Toon boete factoren <a href="/fines/finefactors.do">boete_factoren</a></p>
-                    </div>
+
+                <!--greeting-->
+                <div>
+                    User: <span sec:authentication="name">NOT FOUND</span>
+                    Spring Roles: <span sec:authentication="principal.authorities">NOT FOUND</span>
+                </div>
+                <div class="panel-heading"><h5>Welkom op onze boete Website [[${#httpServletRequest.remoteUser}]]! </h5>
+                    <img src="../images/favicon.ico"></div>
+
+
+                <!--admin features-->
+                <div class="panel-body">
+                    <p>Aanpassen <a href="/fines/finefactors.do">boete_factoren</a></p>
                 </div>
 
-                <div sec:authorize="isAnonymous()">
-                    <div class="panel-body">
-                        <p><a href="/users/loginpage">Log in</a> om de boetefactoren raad te plegen</p>
-                    </div>
+                <div class="panel-body">
+                    <p>Aanpassen <a href="/fines/finefactors.do">buffering tijdsframe</a> segment camera berichten</p>
                 </div>
 
+                <div class="panel-body">
+                    <p>Aanpassen <a href="/fines/finefactors.do">tijdsframe </a>dubbele emissie zone betredingen </p>
+                </div>
+
+                <div class="panel-body">
+                    <p><a href="/fines/finefactors.do">retry delay</a> cameraberichten instellen </p>
+                </div>
+
+                <!--logout-->
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
             </div>
         </div>
     </div>
