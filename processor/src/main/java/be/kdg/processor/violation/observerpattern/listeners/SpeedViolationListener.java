@@ -1,5 +1,6 @@
 package be.kdg.processor.violation.observerpattern.listeners;
 
+import be.kdg.processor.fine.models.Fine;
 import be.kdg.processor.fine.service.FineService;
 import be.kdg.processor.violation.models.SpeedingViolation;
 import be.kdg.processor.violation.observerpattern.events.ConsumeEvent;
@@ -24,8 +25,11 @@ public class SpeedViolationListener implements ApplicationListener<ConsumeEvent>
     public void onApplicationEvent(ConsumeEvent event) {
         try {
             SpeedingViolation speedingViolation = speedViolationService.checkViolation(event);
-            if (speedingViolation != null)
-                fineService.createAndSaveFine(speedingViolation);
+            if (speedingViolation != null) {
+                Fine fine = fineService.createSpeedFine(speedingViolation);
+                fineService.save(fine);
+            }
+
         } catch (IOException | ArithmeticException e) {
             e.printStackTrace();
         }

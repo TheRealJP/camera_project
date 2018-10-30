@@ -9,10 +9,7 @@ public class UserDTO {
     private String userName;
     private String passWord;
 
-    public UserDTO(Long id, String userName, String passWord) {
-        this.id = id;
-        this.userName = userName;
-        this.passWord = passWord;
+    public UserDTO() {
     }
 
 

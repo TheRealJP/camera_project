@@ -1,11 +1,11 @@
 package be.kdg.simulator.simulator;
 
+import be.kdg.simulator.exceptions.MessageSendException;
 import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.messaging.messengers.Messenger;
 import be.kdg.simulator.models.CameraMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.AmqpException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +28,7 @@ public class Simulator {
                 msg = messageGenerator.generateCameraMessage();
             }
 
-        } catch (InterruptedException | AmqpException e) {
+        } catch (InterruptedException | MessageSendException e) {
             log.error(e.getMessage());
         }
     }

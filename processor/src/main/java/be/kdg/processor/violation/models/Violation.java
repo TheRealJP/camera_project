@@ -8,6 +8,9 @@ import lombok.Data;
 
 import java.util.Objects;
 
+/**
+ * Create a new subclass by extending the violation class
+ */
 @Data
 public abstract class Violation {
     protected long id;

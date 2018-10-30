@@ -33,11 +33,6 @@ public class SpeedViolationService implements ViolationService {
         this.cmr = cmr;
     }
 
-    /**
-     * for each message, check if theres another message with the other camera cameraId and its about the same licenseplate
-     * check if the message is about the same licenseplate AND the same other camera
-     * using the messages of the last , for example, 30 minutes. The timeframe can be adjusted.
-     */
     @Override
     public SpeedingViolation checkViolation(ConsumeEvent event) throws IOException, ArithmeticException {
 
@@ -50,10 +45,10 @@ public class SpeedViolationService implements ViolationService {
             LocalDateTime bufferTimeFrame = LocalDateTime.now().minus(timestamp, ChronoField.MILLI_OF_DAY.getBaseUnit()); //timestamp is after 30 minutes ago
             List<CameraMessage> cameraMessages = cmr.findAllByDateTimeIsAfter(bufferTimeFrame);
 
-
             for (CameraMessage cm2 : cameraMessages) {
                 boolean sameLicensePlate = cm.getLicensePlate().equals(cm2.getLicensePlate());
                 boolean otherCameraFound = otherCamera.getCameraId() == cm2.getCameraId();
+
                 if (otherCameraFound && sameLicensePlate) {
                     Segment segment = cam.getSegment();
                     int speed = calculateSpeed(cam.getSegment().getDistance(), cm, cm2);

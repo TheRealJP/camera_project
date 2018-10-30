@@ -1,4 +1,4 @@
-package be.kdg.processor.controllers.rest;
+package be.kdg.processor.fine.controllers;
 
 import be.kdg.processor.fine.dto.FineDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class FineRestControllerTest {
-
 
     @Autowired
     private MockMvc mockMvc;

@@ -17,7 +17,6 @@ public class EmissionViolationService implements ViolationService {
         Camera cam = event.getCamera();
         LicensePlate lp = event.getLp();
 
-
         if (cam.getEuroNorm() > lp.getEuroNumber()) {
             log.info(String.format("Licenseplate %s will receive a emission fine. cameraNorm=%d, carNorm=%d)", lp.getPlateId(), cam.getEuroNorm(), lp.getEuroNumber()));
             return new EmissionViolation(cam, lp.getEuroNumber(), lp, event.getCameraMessage());

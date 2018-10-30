@@ -1,4 +1,4 @@
-package be.kdg.processor.controllers.web;
+package be.kdg.processor.fine.controllers;
 
 import org.junit.Test;
 

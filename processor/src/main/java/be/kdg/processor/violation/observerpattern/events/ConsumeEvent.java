@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationEvent;
 
 import java.util.Objects;
 
+
 public class ConsumeEvent extends ApplicationEvent {
     private final CameraMessage cameraMessage;
     private final Camera camera;

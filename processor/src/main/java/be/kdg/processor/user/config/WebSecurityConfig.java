@@ -15,18 +15,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/api", "/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/start")
                 .failureUrl("/login?error=true")
                 .and().logout().permitAll()
-                .and().csrf().disable(); // we'll enable this in a later blog post
+                .and().headers().xssProtection().disable()
+                .and().csrf().disable();
     }
-
-//    @Bean
-//    public AuthenticationSuccessHandler successHandler() {
-//        return new LoginSuccessHandler();
-//    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -34,17 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin").password("pass").roles("ADMIN");
     }
 
-//    @Bean
-//    @Override
-//    protected UserDetailsService userDetailsService() {
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//                .username("sa")
-//                .password("sa")
-//                .roles("USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
-//
 //    @Bean
 //    public DaoAuthenticationProvider authProvider(UserService userService) {
 //        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

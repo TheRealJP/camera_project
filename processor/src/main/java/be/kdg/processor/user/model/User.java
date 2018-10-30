@@ -15,8 +15,10 @@ public class User {
     @Column
     private String passWord;
 
-    public User(Long id, String userName, String passWord) {
-        this.id = id;
+    public User() {
+    }
+
+    public User(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
     }
