@@ -20,6 +20,8 @@
                 <div class="panel-body">
 
 
+
+                    <!--old-->
                     <table class="table">
                         <tr>
                             <td>ViolationType</td>
@@ -27,9 +29,17 @@
                         </tr>
                         <tr th:each="fineFactorDTO: ${fineFactorDTOS}">
                             <td th:text="${fineFactorDTO.violationType}">$</td>
-                            <td th:text="${fineFactorDTO.factor}">$</td>
+                            <td th:field="*{fineFactorDTO.factor}">$</td>
                         </tr>
                     </table>
+
+
+                    <!--new-->
+                    <form action="#" th:action="@{/finefactors}">
+
+                    </form>
+
+
 
                 </div>
             </div>

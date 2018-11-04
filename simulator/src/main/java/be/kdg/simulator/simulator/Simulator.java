@@ -1,6 +1,6 @@
 package be.kdg.simulator.simulator;
 
-import be.kdg.simulator.exceptions.MessageSendException;
+import be.kdg.simulator.exceptions.MessageNotSentException;
 import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.messaging.messengers.Messenger;
 import be.kdg.simulator.models.CameraMessage;
@@ -28,7 +28,7 @@ public class Simulator {
                 msg = messageGenerator.generateCameraMessage();
             }
 
-        } catch (InterruptedException | MessageSendException e) {
+        } catch (InterruptedException | MessageNotSentException e) {
             log.error(e.getMessage());
         }
     }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>retryable_summary</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/retryable/retryableSettings.do}" th:object="${retryable}" method="post">
+    <input type="hidden" th:value="${retryable.id}" name="id" />
+    <label>Retry attempts <input type="text" th:field="*{retryableAttempts}"/></label>
+    <label>Retry delay <input type="text" th:field="*{retryableTimeOut}"/></label>
+    <input th:type="submit" th:name="submit"/>
+</form>
+
+</body>
+</html>

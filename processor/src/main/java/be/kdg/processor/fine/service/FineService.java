@@ -28,8 +28,6 @@ public class FineService {
         this.ffRepo = ffRepo;
     }
 
-
-
     public Fine save(Fine fine) {
         return fineRepository.save(fine);
     }

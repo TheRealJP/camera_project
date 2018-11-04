@@ -17,9 +17,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.RetryContext;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -28,10 +27,11 @@ import java.io.IOException;
 /**
  * transforms incoming xml to cameramessage object
  * publishes message to listeners
+ * retries to consume message depending on the settings in the RetryableConfig class
  */
 
 @Component
-@RabbitListener(queues = "camera-queue")
+@RabbitListener(queues = RabbitConfig.MESSAGE_QUEUE)
 public class QueueConsumer implements Consumer {
     private static final Logger log = LoggerFactory.getLogger(QueueConsumer.class);
     private final MessageTransformer transformer;
@@ -39,33 +39,40 @@ public class QueueConsumer implements Consumer {
     private final CameraMessageRepository cmr;
     private final ProxyService proxyService;
     private final RabbitTemplate rabbitTemplate;
+    private final RetryTemplate retryTemplate;
 
-    public QueueConsumer(MessageTransformer transformer, ApplicationEventPublisher applicationEventPublisher, CameraMessageRepository cmr, ProxyService proxyService, RabbitTemplate rabbitTemplate) {
+    public QueueConsumer(MessageTransformer transformer, ApplicationEventPublisher applicationEventPublisher, CameraMessageRepository cmr, ProxyService proxyService, RabbitTemplate rabbitTemplate, RetryTemplate retryTemplate) {
         this.transformer = transformer;
         this.applicationEventPublisher = applicationEventPublisher;
         this.cmr = cmr;
         this.proxyService = proxyService;
         this.rabbitTemplate = rabbitTemplate;
+        this.retryTemplate = retryTemplate;
     }
 
-    @Retryable(value = {
-            IOException.class,
-            CameraNotFoundException.class,
-            InvalidLicensePlateException.class,
-            LicensePlateNotFoundException.class}, backoff = @Backoff(delay = 2000))
     @RabbitHandler
     public void consume(final String in) throws IOException, InvalidLicensePlateException, LicensePlateNotFoundException, CameraNotFoundException {
-        CameraMessage cm = (CameraMessage) transformer.transformMessage(in);
-        Camera camera = proxyService.collectCamera(cm.getCameraId());
-        LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
-        applicationEventPublisher.publishEvent(new ConsumeEvent(this, cm, camera, lp));
-        cmr.save(cm);
+
+        retryTemplate.execute(context -> {
+            CameraMessage cm = (CameraMessage) transformer.transformMessage(in);
+            cmr.save(cm);
+
+            Camera camera = proxyService.collectCamera(cm.getCameraId());
+            LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
+
+            applicationEventPublisher.publishEvent(new ConsumeEvent(this, cm, camera, lp));
+            return null;
+
+        }, retryCallBack -> {
+            recover(retryCallBack, in);
+            return null;
+
+        });
     }
 
-    @Recover
-    public void recover(Exception ex, String in) {
-        log.error("Error: {} - CameraMessage {} - Placing on ErrorQueue.", ex.getMessage(), in);
+
+    private void recover(RetryContext retryContext, String in) {
+        log.error("Error: {} - CameraMessage {} - Placing on ErrorQueue.", retryContext.getLastThrowable().getMessage(), in);
         rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_NAME, RabbitConfig.ROUTING_ERROR_KEY, in);
     }
-
 }

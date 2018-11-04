@@ -1,6 +1,6 @@
 package be.kdg.simulator.messaging.messengers;
 
-import be.kdg.simulator.exceptions.MessageSendException;
+import be.kdg.simulator.exceptions.MessageNotSentException;
 import be.kdg.simulator.models.CameraMessage;
 import be.kdg.simulator.transformers.MessageTransformer;
 import org.slf4j.Logger;
@@ -27,13 +27,13 @@ public class QueueMessenger implements Messenger {
     }
 
     @Override
-    public void sendMessage(CameraMessage message) throws MessageSendException {
+    public void sendMessage(CameraMessage message) throws MessageNotSentException {
         try {
             String parsedCameraMessage = (String) transformer.transformMessage(message);
             template.convertAndSend(queue.getName(), parsedCameraMessage);
             log.info('\n' + parsedCameraMessage);
         } catch (AmqpException amqpException) {
-            throw new MessageSendException("message could not be sent to the queue",amqpException);
+            throw new MessageNotSentException("message could not be sent to the queue", amqpException);
         }
 
     }

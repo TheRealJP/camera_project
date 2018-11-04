@@ -14,7 +14,7 @@ public class ConsumeEvent extends ApplicationEvent {
     private final LicensePlate lp;
 
     /**
-     * Create a new ApplicationEvent.
+     * Create a new ConsumeEvent.
      *  @param source the object on which the event initially occurred (never {@code null})
      * @param camera
      * @param lp
@@ -28,7 +28,7 @@ public class ConsumeEvent extends ApplicationEvent {
 
     @Override
     public String toString() {
-        return "ConsumeEvent triggered source=" + source;
+        return "RetryableSettingsUpdateEvent triggered source=" + source;
     }
 
     @Override

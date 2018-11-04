@@ -24,13 +24,15 @@ public class SpeedViolationService implements ViolationService {
     private final Logger log = LoggerFactory.getLogger(SpeedViolationService.class);
     private final ProxyService proxyService;
     private final CameraMessageRepository cmr;
+    private final TimeFrameService tfs;
     @Value("#{${timeframe.between.cameras}}")
     private long timestamp;
 
 
-    public SpeedViolationService(ProxyService proxyService, CameraMessageRepository cmr) {
+    public SpeedViolationService(ProxyService proxyService, CameraMessageRepository cmr, TimeFrameService tfs) {
         this.proxyService = proxyService;
         this.cmr = cmr;
+        this.tfs = tfs;
     }
 
     @Override

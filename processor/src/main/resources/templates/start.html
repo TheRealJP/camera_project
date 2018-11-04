@@ -24,9 +24,7 @@
                     User: <span sec:authentication="name">NOT FOUND</span>
                     Spring Roles: <span sec:authentication="principal.authorities">NOT FOUND</span>
                 </div>
-                <div class="panel-heading"><h5>Welkom op onze boete Website [[${#httpServletRequest.remoteUser}]]! </h5>
-                    <img src="../images/favicon.ico"></div>
-
+                <div class="panel-heading"><h5>Welkom op onze boetewebsite [[${#httpServletRequest.remoteUser}]]! <img src="../images/favicon.ico"></h5></div>
 
                 <!--admin features-->
                 <div class="panel-body">
@@ -34,7 +32,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <p>Aanpassen <a href="/fines/finefactors.do">buffering tijdsframe</a> segment camera berichten</p>
+                    <p>Aanpassen <a href="">buffering tijdsframe</a> segment camera berichten</p>
                 </div>
 
                 <div class="panel-body">
@@ -42,7 +40,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <p><a href="/fines/finefactors.do">retry delay</a> cameraberichten instellen </p>
+                    <p><a href="/retryable/retryableSettings.do">retry delay</a> cameraberichten instellen </p>
                 </div>
 
                 <!--logout-->

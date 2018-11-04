@@ -1,5 +1,6 @@
 package be.kdg.processor.cameramessage.config;
 
+import be.kdg.processor.cameramessage.service.retryable.RetryableService;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -9,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.annotation.EnableRetry;
 
 @Configuration
-@EnableRetry
 public class RabbitConfig {
     public static final String EXCHANGE_NAME = "cameraExchange";
     public static final String MESSAGE_QUEUE = "camera-queue";
@@ -42,5 +42,9 @@ public class RabbitConfig {
         return BindingBuilder.bind(errorQueue()).to(exchange()).with(ROUTING_ERROR_KEY);
     }
 
+    @Bean
+    public RetryableService retryableService(){
+        return new RetryableService();
+    }
 
 }
