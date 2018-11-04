@@ -8,7 +8,10 @@
 <body>
 
 <form action="#" th:action="@{/retryable/retryableSettings.do}" th:object="${retryable}" method="post">
-    <input type="hidden" th:value="${retryable.id}" name="id" />
+    <!--<input type="hidden" th:value="${retryable.id}" name="id" />-->
+    <p type="text" th:value="${retryable.id}" ></p>
+
+
     <label>Retry attempts <input type="text" th:field="*{retryableAttempts}"/></label>
     <label>Retry delay <input type="text" th:field="*{retryableTimeOut}"/></label>
     <input th:type="submit" th:name="submit"/>
