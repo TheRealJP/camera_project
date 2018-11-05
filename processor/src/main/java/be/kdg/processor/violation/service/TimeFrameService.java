@@ -1,4 +1,4 @@
-package be.kdg.processor.violation.service;900
+package be.kdg.processor.violation.service;
 
 import be.kdg.processor.violation.models.TimeFrame;
 import be.kdg.processor.violation.repository.TimeFrameRepository;
@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class TimeFrameService {
-
     private static final Logger log = LoggerFactory.getLogger(TimeFrameService.class);
     @Autowired
     private SpeedViolationService svs;

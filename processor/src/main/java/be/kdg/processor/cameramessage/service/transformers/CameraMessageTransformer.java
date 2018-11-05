@@ -19,8 +19,6 @@ import java.time.format.DateTimeFormatter;
 @ConditionalOnProperty(name = "transformer.type", havingValue = "xml")
 public class CameraMessageTransformer implements MessageTransformer {
 
-    private final Logger log = LoggerFactory.getLogger(CameraMessageTransformer.class);
-
     @Override
     public CameraMessage transformMessage(String msg) throws IOException {
         XmlMapper mapper = new XmlMapper();

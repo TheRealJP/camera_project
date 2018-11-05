@@ -4,11 +4,7 @@ import be.kdg.processor.cameramessage.config.RabbitConfig;
 import be.kdg.processor.cameramessage.models.CameraMessage;
 import be.kdg.processor.cameramessage.repositories.CameraMessageRepository;
 import be.kdg.processor.cameramessage.service.transformers.MessageTransformer;
-import be.kdg.processor.observer.events.ConsumeEvent;
 import be.kdg.processor.observer.publishers.MessagePublisher;
-import be.kdg.processor.proxy.models.Camera;
-import be.kdg.processor.proxy.models.LicensePlate;
-import be.kdg.processor.proxy.service.ProxyService;
 import be.kdg.sa.services.CameraNotFoundException;
 import be.kdg.sa.services.InvalidLicensePlateException;
 import be.kdg.sa.services.LicensePlateNotFoundException;
@@ -37,29 +33,23 @@ public class QueueConsumer implements Consumer {
     private final MessageTransformer transformer;
     private final MessagePublisher messagePublisher;
     private final CameraMessageRepository cmr;
-    private final ProxyService proxyService;
     private final RabbitTemplate rabbitTemplate;
     private final RetryTemplate retryTemplate;
 
-    public QueueConsumer(MessageTransformer transformer, MessagePublisher messagePublisher, CameraMessageRepository cmr, ProxyService proxyService, RabbitTemplate rabbitTemplate, RetryTemplate retryTemplate) {
+    public QueueConsumer(MessageTransformer transformer, MessagePublisher messagePublisher, CameraMessageRepository cmr, RabbitTemplate rabbitTemplate, RetryTemplate retryTemplate) {
         this.transformer = transformer;
         this.messagePublisher = messagePublisher;
         this.cmr = cmr;
-        this.proxyService = proxyService;
         this.rabbitTemplate = rabbitTemplate;
         this.retryTemplate = retryTemplate;
     }
 
     @RabbitHandler
     public void consume(final String in) throws IOException, InvalidLicensePlateException, LicensePlateNotFoundException, CameraNotFoundException {
-
         retryTemplate.execute(context -> {
             CameraMessage cm = (CameraMessage) transformer.transformMessage(in);
             cmr.save(cm);
-
-            Camera camera = proxyService.collectCamera(cm.getCameraId());
-            LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
-            messagePublisher.publishMessage(cm, camera, lp);
+            messagePublisher.publishMessage(cm);
             return null;
 
         }, retryCallBack -> {
@@ -68,7 +58,6 @@ public class QueueConsumer implements Consumer {
 
         });
     }
-
 
     private void recover(RetryContext retryContext, String in) {
         log.error("Error: {} - CameraMessage {} - Placing on ErrorQueue.", retryContext.getLastThrowable().getMessage(), in);

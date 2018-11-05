@@ -66,7 +66,7 @@ public class SpeedViolationService implements ViolationService {
     private int calculateSpeed(int distance, CameraMessage firstMessage, CameraMessage secondMessage) throws ArithmeticException {
         int firstMessageTime = firstMessage.getDateTime().toLocalTime().toSecondOfDay();
         int secondMessageTime = secondMessage.getDateTime().toLocalTime().toSecondOfDay();
-        int time = secondMessageTime - firstMessageTime;
+        int time = Math.abs(secondMessageTime - firstMessageTime);
         return distance / time;
     }
 
