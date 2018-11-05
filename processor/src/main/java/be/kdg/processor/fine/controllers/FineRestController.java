@@ -53,13 +53,11 @@ public class FineRestController {
         return new ResponseEntity<>(modelMapper.map(fine, FineDTO.class), HttpStatus.ACCEPTED);
     }
 
-
     @PutMapping(path = "/fines/{id}/price", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FineDTO> putPriceFine(@PathVariable Long id, @RequestParam("price") double price) throws FineException {
         Fine fine = fineService.setAmount(id, price);
         return new ResponseEntity<>(modelMapper.map(fine, FineDTO.class), HttpStatus.ACCEPTED);
     }
-
 
     @GetMapping(path = "/fines/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FineDTO>> loadFilteredFines(
