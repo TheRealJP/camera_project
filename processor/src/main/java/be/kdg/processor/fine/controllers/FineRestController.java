@@ -47,12 +47,19 @@ public class FineRestController {
         return new ResponseEntity<>(fineDTOMapper.toFineDTOList(fines), HttpStatus.OK);
     }
 
-    @PutMapping(path = "/fines/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/fines/{id}/approve", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FineDTO> putApproveFine(@PathVariable Long id, @RequestParam("approved") boolean approved) throws FineException {
         Fine fine = fineService.setApproveFine(id, approved);
-        Fine fineOut = fineService.save(fine);
-        return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(modelMapper.map(fine, FineDTO.class), HttpStatus.ACCEPTED);
     }
+
+
+    @PutMapping(path = "/fines/{id}/price", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FineDTO> putPriceFine(@PathVariable Long id, @RequestParam("price") double price) throws FineException {
+        Fine fine = fineService.setAmount(id, price);
+        return new ResponseEntity<>(modelMapper.map(fine, FineDTO.class), HttpStatus.ACCEPTED);
+    }
+
 
     @GetMapping(path = "/fines/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FineDTO>> loadFilteredFines(

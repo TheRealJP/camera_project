@@ -27,7 +27,9 @@ public class MessagePublisher implements ApplicationEventPublisherAware {
     public void publishMessage(CameraMessage cm) throws IOException {
         Camera camera = proxyService.collectCamera(cm.getCameraId());
         LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
-        publisher.publishEvent(new ConsumeEvent(this, cm, camera, lp));
+        Camera otherCamera = proxyService.collectCamera(camera.getCameraId());
+
+        publisher.publishEvent(new ConsumeEvent(this, cm, camera, otherCamera, lp));
     }
 
     @Override

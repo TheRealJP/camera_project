@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FineDTO {
     private int amount;
     private Violation violation;

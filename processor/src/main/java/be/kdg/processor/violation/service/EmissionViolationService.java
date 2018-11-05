@@ -26,7 +26,6 @@ public class EmissionViolationService implements ViolationService {
         this.timeFrame = 86400000;
     }
 
-
     /**
      * latest fine timestamp + timeframe = endpoint of timeframe,
      * after this point we'll create a new fine if the car enters a low emission zone

@@ -54,7 +54,13 @@ public class FineService {
     public Fine setApproveFine(Long id, boolean approved) throws FineException {
         Fine fine = get(id);
         fine.setApproved(approved);
-        return fine;
+        return this.save(fine);
+    }
+
+    public Fine setAmount(Long id, double amount) throws FineException {
+        Fine fine = get(id);
+        fine.setAmount(amount);
+        return this.save(fine);
     }
 
     public SpeedFine createSpeedFine(Violation violation) {

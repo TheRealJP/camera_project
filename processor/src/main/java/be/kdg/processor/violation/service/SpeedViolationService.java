@@ -2,12 +2,12 @@ package be.kdg.processor.violation.service;
 
 import be.kdg.processor.cameramessage.models.CameraMessage;
 import be.kdg.processor.cameramessage.repositories.CameraMessageRepository;
+import be.kdg.processor.observer.events.ConsumeEvent;
 import be.kdg.processor.proxy.models.Camera;
 import be.kdg.processor.proxy.models.LicensePlate;
 import be.kdg.processor.proxy.models.Segment;
 import be.kdg.processor.proxy.service.ProxyService;
 import be.kdg.processor.violation.models.SpeedingViolation;
-import be.kdg.processor.observer.events.ConsumeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -33,13 +33,13 @@ public class SpeedViolationService implements ViolationService {
 
     @Override
     public SpeedingViolation checkViolation(ConsumeEvent event) throws IOException, ArithmeticException {
-
         Camera cam = event.getCamera();
+        Camera otherCamera = event.getOtherCamera();
         LicensePlate lp = event.getLp();
         CameraMessage cm = event.getCameraMessage();
 
-        if (cam.getSegment() != null) {
-            Camera otherCamera = proxyService.collectCamera(cam.getSegment().getConnectedCameraId());
+        //TODO get other camera
+        if (cam.getSegment() != null /*|| otherCamera != null*/) {
             LocalDateTime bufferTimeFrame = LocalDateTime.now().minus(timeFrame, ChronoField.MILLI_OF_DAY.getBaseUnit()); //timeFrame is after 30 minutes ago
             List<CameraMessage> cameraMessages = cmr.findAllByDateTimeIsAfter(bufferTimeFrame);
 
@@ -67,7 +67,7 @@ public class SpeedViolationService implements ViolationService {
         int firstMessageTime = firstMessage.getDateTime().toLocalTime().toSecondOfDay();
         int secondMessageTime = secondMessage.getDateTime().toLocalTime().toSecondOfDay();
         int time = Math.abs(secondMessageTime - firstMessageTime);
-        return distance / time;
+        return distance / (time == 0 ? 1 : time);
     }
 
     public void setTimeFrame(long timeFrame) {

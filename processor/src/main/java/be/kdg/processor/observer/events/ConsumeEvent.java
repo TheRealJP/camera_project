@@ -11,12 +11,14 @@ import java.util.Objects;
 public class ConsumeEvent extends ApplicationEvent {
     private final CameraMessage cameraMessage;
     private final Camera camera;
+    private final Camera otherCamera;
     private final LicensePlate lp;
 
-    public ConsumeEvent(Object source, CameraMessage cameraMessage, Camera camera, LicensePlate lp) {
+    public ConsumeEvent(Object source, CameraMessage cameraMessage, Camera camera, Camera otherCamera, LicensePlate lp) {
         super(source);
         this.cameraMessage = cameraMessage;
         this.camera = camera;
+        this.otherCamera = otherCamera;
         this.lp = lp;
     }
 
@@ -27,12 +29,17 @@ public class ConsumeEvent extends ApplicationEvent {
         ConsumeEvent that = (ConsumeEvent) o;
         return Objects.equals(cameraMessage, that.cameraMessage) &&
                 Objects.equals(camera, that.camera) &&
+                Objects.equals(otherCamera, that.otherCamera) &&
                 Objects.equals(lp, that.lp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cameraMessage, camera, lp);
+        return Objects.hash(cameraMessage, camera, otherCamera, lp);
+    }
+
+    public Camera getOtherCamera() {
+        return otherCamera;
     }
 
     public CameraMessage getCameraMessage() {
