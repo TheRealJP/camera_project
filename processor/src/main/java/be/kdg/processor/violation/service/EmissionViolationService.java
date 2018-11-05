@@ -3,7 +3,7 @@ package be.kdg.processor.violation.service;
 import be.kdg.processor.proxy.models.Camera;
 import be.kdg.processor.proxy.models.LicensePlate;
 import be.kdg.processor.violation.models.EmissionViolation;
-import be.kdg.processor.violation.observerpattern.events.ConsumeEvent;
+import be.kdg.processor.observer.events.ConsumeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmissionViolationService implements ViolationService {
     private final Logger log = LoggerFactory.getLogger(EmissionViolationService.class);
+    private long timeFrame;
+
+    public EmissionViolationService() {
+        this.timeFrame = 86400000;
+    }
+
 
     @Override
     public EmissionViolation checkViolation(ConsumeEvent event) {
@@ -22,5 +28,10 @@ public class EmissionViolationService implements ViolationService {
             return new EmissionViolation(cam, lp.getEuroNumber(), lp, event.getCameraMessage());
         }
         return null;
+    }
+
+
+    public void setTimeFrame(long timeFrame) {
+        this.timeFrame = timeFrame;
     }
 }

@@ -6,9 +6,11 @@ import java.util.ArrayList;
 
 @Data
 public class FineFactorDTO {
-    private int factor;
-    private String violationType;
+    private int speedFactor;
+    private int emissionFactor;
 
     public FineFactorDTO() {
     }
+
+
 }

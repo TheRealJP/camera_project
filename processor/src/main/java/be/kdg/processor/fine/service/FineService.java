@@ -60,25 +60,26 @@ public class FineService {
     public SpeedFine createSpeedFine(Violation violation) {
         SpeedingViolation sv = (SpeedingViolation) violation;
 
-        Optional<FineFactor> fineFactor = ffRepo.findFineFactorByViolationType("Speed");
-        if (!fineFactor.isPresent()) fineFactor = Optional.ofNullable(ffRepo.save(new FineFactor(3, "Speed")));
+        Optional<FineFactor> fineFactor = Optional.ofNullable(ffRepo.findFirstByEmissionfactorNotNullAndSpeedfactorNotNull());
+        int speedfactor = fineFactor.map(FineFactor::getSpeedfactor).orElse(4);
         int speedLimit = sv.getCam().getSegment().getSpeedLimit();
         String licensePlate = sv.getMessage().getLicensePlate();
         LocalDateTime dateTime = violation.getMessage().getDateTime();
-        double money = sv.getSpeed() - speedLimit * fineFactor.get().getFactor();
+        double money = (sv.getSpeed() - speedLimit) * speedfactor;
+
         return new SpeedFine(money, licensePlate, dateTime, speedLimit, sv.getSpeed());
     }
 
     public EmissionFine createEmissionFine(Violation violation) {
         EmissionViolation ev = (EmissionViolation) violation;
+
         LocalDateTime dateTime = violation.getMessage().getDateTime();
         int lpNorm = ev.getLicensePlateEuroNorm();
         int camNorm = ev.getCameraEuroNorm();
         String lp = ev.getMessage().getLicensePlate();
+        Optional<FineFactor> fineFactor = Optional.ofNullable(ffRepo.findFirstByEmissionfactorNotNullAndSpeedfactorNotNull());
+        int factor = fineFactor.map(FineFactor::getEmissionfactor).orElse(150);
 
-        Optional<FineFactor> fineFactor = ffRepo.findFineFactorByViolationType("Emission");
-        int factor;
-        factor = fineFactor.map(FineFactor::getFactor).orElseGet(() -> ffRepo.save(new FineFactor(150, "Emission")).getFactor());
         return new EmissionFine(factor, lp, dateTime, camNorm, lpNorm);
     }
 }

@@ -18,3 +18,10 @@ CORE:
 
 //"location":{"lat":51.203512,"long":4.437337}
 //segment":{"connectedCameraId":5,"distance":550,"speedLimit":50
+
+//nummerplaat in, emissie out
+// {"cameraId":1,"location":{"lat":51.231932,"long":4.502442},"segment":{"connectedCameraId":2,"distance":4300,"speedLimit":70}}
+// {"cameraId":2,"location":{"lat":51.229822,"long":4.44383}}
+// {"cameraId":3,"location":{"lat":51.202178,"long":4.389029},"euroNorm":4}
+// {"cameraId":4,"location":{"lat":51.203512,"long":4.437337},"segment":{"connectedCameraId":5,"distance":550,"speedLimit":50},"euroNorm":3}
+// {"cameraId":5,"location":{"lat":51.208197,"long":4.440292},"euroNorm":3}

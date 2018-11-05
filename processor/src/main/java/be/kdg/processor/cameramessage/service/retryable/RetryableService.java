@@ -1,7 +1,7 @@
 package be.kdg.processor.cameramessage.service.retryable;
 
 import be.kdg.processor.cameramessage.models.Retryable;
-import be.kdg.processor.cameramessage.observerpattern.publishers.RetryablePublisher;
+import be.kdg.processor.observer.publishers.SettingPublisher;
 import be.kdg.processor.cameramessage.repositories.RetryableRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ public class RetryableService {
     private static final Logger log = LoggerFactory.getLogger(RetryableService.class);
 
     @Autowired
-    private RetryablePublisher publisher;
+    private SettingPublisher publisher;
 
     @Autowired
     private RetryableRepository settingRepo;
@@ -23,14 +23,10 @@ public class RetryableService {
     public RetryableService() {
     }
 
-    public Retryable save(Retryable retryable) {
-        return settingRepo.save(retryable);
-    }
-
     public Retryable getRetryable() {
         Optional<Retryable> r = settingRepo.findById(0L);
         if (r.isPresent()) {
-            log.info("retryable:" + r.get().toString());
+            log.info("retryableDTO:" + r.get().toString());
             return r.get();
         }
 
@@ -41,20 +37,18 @@ public class RetryableService {
         return settingRepo.save(newR);
     }
 
-    //there is not a retryable object made.
+
     public Retryable updateRetryable(Retryable retryable) {
         Optional<Retryable> r = settingRepo.findById(0L);
         Retryable retryableIn;
 
         if (r.isPresent()) {
-            log.info("retryable:" + r.get().toString());
             retryableIn = r.get();
             retryableIn.setRetryableAttempts(retryable.getRetryableAttempts());
             retryableIn.setRetryableTimeOut(retryable.getRetryableTimeOut());
             Retryable retryableOut = settingRepo.save(retryableIn);
-            log.info("retryable:" + retryableOut);
 
-            publisher.publishEvent(retryableOut);
+            publisher.publishRetryableEvent(retryableOut);
             return retryableOut;
         }
 

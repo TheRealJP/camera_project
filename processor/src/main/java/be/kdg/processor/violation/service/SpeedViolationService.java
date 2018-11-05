@@ -7,10 +7,9 @@ import be.kdg.processor.proxy.models.LicensePlate;
 import be.kdg.processor.proxy.models.Segment;
 import be.kdg.processor.proxy.service.ProxyService;
 import be.kdg.processor.violation.models.SpeedingViolation;
-import be.kdg.processor.violation.observerpattern.events.ConsumeEvent;
+import be.kdg.processor.observer.events.ConsumeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,15 +23,12 @@ public class SpeedViolationService implements ViolationService {
     private final Logger log = LoggerFactory.getLogger(SpeedViolationService.class);
     private final ProxyService proxyService;
     private final CameraMessageRepository cmr;
-    private final TimeFrameService tfs;
-    @Value("#{${timeframe.between.cameras}}")
-    private long timestamp;
+    private long timeFrame;
 
-
-    public SpeedViolationService(ProxyService proxyService, CameraMessageRepository cmr, TimeFrameService tfs) {
+    public SpeedViolationService(ProxyService proxyService, CameraMessageRepository cmr) {
         this.proxyService = proxyService;
         this.cmr = cmr;
-        this.tfs = tfs;
+        this.timeFrame = 1800000;
     }
 
     @Override
@@ -44,7 +40,7 @@ public class SpeedViolationService implements ViolationService {
 
         if (cam.getSegment() != null) {
             Camera otherCamera = proxyService.collectCamera(cam.getSegment().getConnectedCameraId());
-            LocalDateTime bufferTimeFrame = LocalDateTime.now().minus(timestamp, ChronoField.MILLI_OF_DAY.getBaseUnit()); //timestamp is after 30 minutes ago
+            LocalDateTime bufferTimeFrame = LocalDateTime.now().minus(timeFrame, ChronoField.MILLI_OF_DAY.getBaseUnit()); //timeFrame is after 30 minutes ago
             List<CameraMessage> cameraMessages = cmr.findAllByDateTimeIsAfter(bufferTimeFrame);
 
             for (CameraMessage cm2 : cameraMessages) {
@@ -72,5 +68,9 @@ public class SpeedViolationService implements ViolationService {
         int secondMessageTime = secondMessage.getDateTime().toLocalTime().toSecondOfDay();
         int time = secondMessageTime - firstMessageTime;
         return distance / time;
+    }
+
+    public void setTimeFrame(long timeFrame) {
+        this.timeFrame = timeFrame;
     }
 }

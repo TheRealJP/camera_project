@@ -1,4 +1,4 @@
-package be.kdg.processor.violation.observerpattern.events;
+package be.kdg.processor.observer.events;
 
 import be.kdg.processor.cameramessage.models.CameraMessage;
 import be.kdg.processor.proxy.models.Camera;
@@ -13,22 +13,11 @@ public class ConsumeEvent extends ApplicationEvent {
     private final Camera camera;
     private final LicensePlate lp;
 
-    /**
-     * Create a new ConsumeEvent.
-     *  @param source the object on which the event initially occurred (never {@code null})
-     * @param camera
-     * @param lp
-     */
     public ConsumeEvent(Object source, CameraMessage cameraMessage, Camera camera, LicensePlate lp) {
         super(source);
         this.cameraMessage = cameraMessage;
         this.camera = camera;
         this.lp = lp;
-    }
-
-    @Override
-    public String toString() {
-        return "RetryableSettingsUpdateEvent triggered source=" + source;
     }
 
     @Override

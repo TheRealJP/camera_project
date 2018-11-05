@@ -12,16 +12,12 @@ public class FineFactor {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //
     private Long id;
     @Column
-    private int factor;
+    private int speedfactor;
     @Column
-    private String violationType;
+    private int emissionfactor;
+
 
     public FineFactor() {
-    }
-
-    public FineFactor(int factor, String violationType) {
-        this.factor = factor;
-        this.violationType = violationType;
     }
 
 
@@ -30,13 +26,13 @@ public class FineFactor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FineFactor that = (FineFactor) o;
-        return factor == that.factor &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(violationType, that.violationType);
+        return speedfactor == that.speedfactor &&
+                emissionfactor == that.emissionfactor &&
+                Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, factor, violationType);
+        return Objects.hash(id, speedfactor, emissionfactor);
     }
 }

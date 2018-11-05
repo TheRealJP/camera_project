@@ -13,14 +13,29 @@ public class FineFactorService {
     @Autowired
     private FineFactorRepository fineFactorRepository;
 
+    public FineFactor getFineFactor() {
+        Optional<FineFactor> ff = Optional.ofNullable(fineFactorRepository.findFirstByEmissionfactorNotNullAndSpeedfactorNotNull());
+        if (ff.isPresent()) return ff.get();
 
-
-    public List<FineFactor> getAll() {
-        return fineFactorRepository.findAll();
+        FineFactor newff = new FineFactor();
+        newff.setId(0L);
+        newff.setSpeedfactor(4);
+        newff.setEmissionfactor(150);
+        return fineFactorRepository.save(newff);
     }
 
-    public FineFactor getByViolationType(String violationType) {
-        Optional<FineFactor> ff = fineFactorRepository.findFineFactorByViolationType(violationType);
-        return ff.orElse(null);
+    public FineFactor updateFineFactor(FineFactor ff) {
+        Optional<FineFactor> ffOld = Optional.ofNullable(fineFactorRepository.findFirstByEmissionfactorNotNullAndSpeedfactorNotNull());
+        if (ffOld.isPresent()) {
+            FineFactor ffIn = ffOld.get();
+            ffIn.setSpeedfactor(ff.getSpeedfactor());
+            ffIn.setEmissionfactor(ff.getEmissionfactor());
+            return fineFactorRepository.save(ffIn);
+        }
+
+        //shows it didnt work to viewer
+        ff.setEmissionfactor(0);
+        ff.setSpeedfactor(0);
+        return ff;
     }
 }

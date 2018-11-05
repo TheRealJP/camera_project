@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface FineFactorRepository extends JpaRepository<FineFactor, Long> {
-    Optional<FineFactor> findFineFactorByViolationType(String violationType);
+    FineFactor findFirstByEmissionfactorNotNullAndSpeedfactorNotNull();
 }

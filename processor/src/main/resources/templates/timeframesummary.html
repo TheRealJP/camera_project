@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>timeframe_summary</title>
+</head>
+<body>
+
+<div class="panel-heading"><h1>TimeFrame overtredingen instellingen</h1></div>
+<div class="panel-body">
+
+
+    <form action="#" th:action="@{/timeframe/timeFrameSettings.do}" th:object="${timeframeDTO}" method="post">
+        <label>Speeding TimeFrame <input type="text" th:field="*{speedTimeFrame}"/></label>
+        <br/>
+        <label>Emission TimeFrame <input type="text" th:field="*{emissionTimeFrame}"/></label>
+        <br/>
+        <input th:type="submit" th:name="submit" th:value="Submit"/>
+    </form>
+
+    <a href="/start">Terug naar start</a>
+
+</body>
+</html>

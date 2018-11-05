@@ -1,4 +1,4 @@
-package be.kdg.processor.cameramessage.observerpattern.events;
+package be.kdg.processor.observer.events;
 
 import be.kdg.processor.cameramessage.models.Retryable;
 import org.springframework.context.ApplicationEvent;

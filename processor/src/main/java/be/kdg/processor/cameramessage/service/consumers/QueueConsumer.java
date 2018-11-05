@@ -4,10 +4,11 @@ import be.kdg.processor.cameramessage.config.RabbitConfig;
 import be.kdg.processor.cameramessage.models.CameraMessage;
 import be.kdg.processor.cameramessage.repositories.CameraMessageRepository;
 import be.kdg.processor.cameramessage.service.transformers.MessageTransformer;
+import be.kdg.processor.observer.events.ConsumeEvent;
+import be.kdg.processor.observer.publishers.MessagePublisher;
 import be.kdg.processor.proxy.models.Camera;
 import be.kdg.processor.proxy.models.LicensePlate;
 import be.kdg.processor.proxy.service.ProxyService;
-import be.kdg.processor.violation.observerpattern.events.ConsumeEvent;
 import be.kdg.sa.services.CameraNotFoundException;
 import be.kdg.sa.services.InvalidLicensePlateException;
 import be.kdg.sa.services.LicensePlateNotFoundException;
@@ -16,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.retry.RetryContext;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Component;
@@ -35,15 +35,15 @@ import java.io.IOException;
 public class QueueConsumer implements Consumer {
     private static final Logger log = LoggerFactory.getLogger(QueueConsumer.class);
     private final MessageTransformer transformer;
-    private final ApplicationEventPublisher applicationEventPublisher;
+    private final MessagePublisher messagePublisher;
     private final CameraMessageRepository cmr;
     private final ProxyService proxyService;
     private final RabbitTemplate rabbitTemplate;
     private final RetryTemplate retryTemplate;
 
-    public QueueConsumer(MessageTransformer transformer, ApplicationEventPublisher applicationEventPublisher, CameraMessageRepository cmr, ProxyService proxyService, RabbitTemplate rabbitTemplate, RetryTemplate retryTemplate) {
+    public QueueConsumer(MessageTransformer transformer, MessagePublisher messagePublisher, CameraMessageRepository cmr, ProxyService proxyService, RabbitTemplate rabbitTemplate, RetryTemplate retryTemplate) {
         this.transformer = transformer;
-        this.applicationEventPublisher = applicationEventPublisher;
+        this.messagePublisher = messagePublisher;
         this.cmr = cmr;
         this.proxyService = proxyService;
         this.rabbitTemplate = rabbitTemplate;
@@ -59,8 +59,7 @@ public class QueueConsumer implements Consumer {
 
             Camera camera = proxyService.collectCamera(cm.getCameraId());
             LicensePlate lp = proxyService.collectLicensePlate(cm.getLicensePlate());
-
-            applicationEventPublisher.publishEvent(new ConsumeEvent(this, cm, camera, lp));
+            messagePublisher.publishMessage(cm, camera, lp);
             return null;
 
         }, retryCallBack -> {

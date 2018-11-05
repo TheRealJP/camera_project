@@ -16,30 +16,20 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h5>Boetefactor overzicht</h5></div>
+
+                <div class="panel-heading"><h1>Boetefactor instellingen</h1></div>
                 <div class="panel-body">
 
-
-
-                    <!--old-->
-                    <table class="table">
-                        <tr>
-                            <td>ViolationType</td>
-                            <td>Factor</td>
-                        </tr>
-                        <tr th:each="fineFactorDTO: ${fineFactorDTOS}">
-                            <td th:text="${fineFactorDTO.violationType}">$</td>
-                            <td th:field="*{fineFactorDTO.factor}">$</td>
-                        </tr>
-                    </table>
-
-
                     <!--new-->
-                    <form action="#" th:action="@{/finefactors}">
-
+                    <form action="#" th:action="@{/fines/finefactors.do}" th:object="${fineFactorDTO}" method="post">
+                        <label>Speeding Factor <input type="text" th:field="*{speedFactor}"/></label>
+                        <br/>
+                        <label>Emission Factor <input type="text" th:field="*{emissionFactor}"/></label>
+                        <br/>
+                        <input th:type="submit" th:name="submit" th:value="Submit"/>
                     </form>
 
-
+                    <a href="/start">Terug naar start</a>
 
                 </div>
             </div>

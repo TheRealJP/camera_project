@@ -1,14 +1,17 @@
-package be.kdg.processor.cameramessage.observerpattern.listeners;
+package be.kdg.processor.observer.listeners;
 
-import be.kdg.processor.cameramessage.observerpattern.events.RetryableSettingsUpdateEvent;
+import be.kdg.processor.observer.events.RetryableSettingsUpdateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.EventListener;
 import org.springframework.retry.backoff.FixedBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Component;
+
+/**
+ * listens to updates in the retryable table and applies them to the retryTemplate
+ */
 
 @Component
 public class RetryableListener implements ApplicationListener<RetryableSettingsUpdateEvent> {

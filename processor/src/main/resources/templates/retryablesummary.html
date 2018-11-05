@@ -6,16 +6,19 @@
     <title>retryable_summary</title>
 </head>
 <body>
+<div class="panel-heading"><h1>Retry instellingen messagequeue</h1></div>
+<div class="panel-body">
 
-<form action="#" th:action="@{/retryable/retryableSettings.do}" th:object="${retryable}" method="post">
-    <!--<input type="hidden" th:value="${retryable.id}" name="id" />-->
-    <p type="text" th:value="${retryable.id}" ></p>
+    <form action="#" th:action="@{/retryable/retryableSettings.do}" th:object="${retryableDTO}" method="post">
+        <input type="hidden" th:value="${retryableDTO}" name="id"/>
+        <label>Retry attempts <input type="text" th:field="*{retryableAttempts}"/></label>
+        <br/>
+        <label>Retry delay <input type="text" th:field="*{retryableTimeOut}"/></label>
+        <br/>
+        <input th:type="submit" th:name="submit" th:value="Submit"/>
+    </form>
 
-
-    <label>Retry attempts <input type="text" th:field="*{retryableAttempts}"/></label>
-    <label>Retry delay <input type="text" th:field="*{retryableTimeOut}"/></label>
-    <input th:type="submit" th:name="submit"/>
-</form>
+    <a href="/start">Terug naar start</a>
 
 </body>
 </html>
