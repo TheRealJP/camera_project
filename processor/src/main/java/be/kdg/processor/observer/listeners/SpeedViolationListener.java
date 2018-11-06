@@ -2,13 +2,11 @@ package be.kdg.processor.observer.listeners;
 
 import be.kdg.processor.fine.models.Fine;
 import be.kdg.processor.fine.service.FineService;
-import be.kdg.processor.violation.models.SpeedingViolation;
 import be.kdg.processor.observer.events.ConsumeEvent;
+import be.kdg.processor.violation.models.SpeedingViolation;
 import be.kdg.processor.violation.service.SpeedViolationService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 
 /**
@@ -19,7 +17,6 @@ import java.io.IOException;
 public class SpeedViolationListener implements ApplicationListener<ConsumeEvent> {
     private final FineService fineService;
     private final SpeedViolationService speedViolationService;
-
 
     public SpeedViolationListener(FineService fineService, SpeedViolationService speedViolationService) {
         this.fineService = fineService;
@@ -35,7 +32,7 @@ public class SpeedViolationListener implements ApplicationListener<ConsumeEvent>
                 fineService.save(fine);
             }
 
-        } catch (IOException | ArithmeticException e) {
+        } catch (ArithmeticException e) {
             e.printStackTrace();
         }
     }

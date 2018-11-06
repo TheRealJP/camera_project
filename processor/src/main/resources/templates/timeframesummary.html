@@ -1,25 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE html>Welkom op onze boetewebsite [ admin ]
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" media="screen"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" media="screen"/>
+    <!-- Scripts -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <meta charset="UTF-8">
     <title>timeframe_summary</title>
 </head>
 <body>
 
-<div class="panel-heading"><h1>TimeFrame overtredingen instellingen</h1></div>
-<div class="panel-body">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading"><h1>Overtredingen timeframe</h1></div>
+                <div class="panel-body">
 
 
-    <form action="#" th:action="@{/timeframe/timeFrameSettings.do}" th:object="${timeframeDTO}" method="post">
-        <label>Speeding TimeFrame <input type="text" th:field="*{speedTimeFrame}"/></label>
-        <br/>
-        <label>Emission TimeFrame <input type="text" th:field="*{emissionTimeFrame}"/></label>
-        <br/>
-        <input th:type="submit" th:name="submit" th:value="Submit"/>
-    </form>
+                    <form action="#" th:action="@{/timeframe/timeFrameSettings.do}" th:object="${timeframeDTO}"
+                          method="post">
+                        <label>Speeding TimeFrame <input type="text" th:field="*{speedTimeFrame}"/></label>
+                        <br/>
+                        <label>Emission TimeFrame <input type="text" th:field="*{emissionTimeFrame}"/></label>
+                        <br/>
+                        <input th:type="submit" th:name="submit" th:value="Submit"/>
+                    </form>
 
-    <a href="/start">Terug naar start</a>
+                    <a href="/start">Terug naar start</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

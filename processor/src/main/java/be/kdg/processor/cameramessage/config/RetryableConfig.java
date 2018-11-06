@@ -14,6 +14,7 @@ import java.util.Optional;
 @Configuration
 @EnableRetry
 public class RetryableConfig {
+
     private final RetryableService retryableService;
 
     public RetryableConfig(RetryableService retryableService) {

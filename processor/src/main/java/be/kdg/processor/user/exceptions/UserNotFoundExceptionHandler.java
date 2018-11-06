@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class UserNotFoundExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(Throwable.class)
+    @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity<?> handleFineNotFound(RuntimeException ex, WebRequest wr, final Model model) {
         String errorMessage = (ex != null ? ex.getMessage() : "Unknown error");

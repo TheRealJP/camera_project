@@ -28,11 +28,13 @@ public class UserRestController {
         this.userDTOMapper = userDTOMapper;
     }
 
+
     @GetMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getUser(@PathVariable Long id) throws UserNotFoundException {
         User user = userService.get(id);
         return new ResponseEntity<>(modelMapper.map(user, UserDTO.class), HttpStatus.OK);
     }
+
 
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> getUsers() {
@@ -40,21 +42,30 @@ public class UserRestController {
         return new ResponseEntity<>(userDTOMapper.toUserDTOList(users), HttpStatus.OK);
     }
 
+
     @PostMapping(value = "/users/create", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> createUser(@ModelAttribute UserDTO userDTO) {
-        User newUser = new User(userDTO.getUserName(), userDTO.getUserName());
-        User userOut = userService.save(newUser);
+        User user = userService.get(userDTO.getUserName());
+
+        if (user.getUserName().equalsIgnoreCase(userDTO.getUserName())) {
+            return new ResponseEntity<>(modelMapper.map(user, UserDTO.class), HttpStatus.OK);
+        }
+
+        user = new User(userDTO.getUserName(), userDTO.getPassWord());
+        User userOut = userService.save(user);
         return new ResponseEntity<>(modelMapper.map(userOut, UserDTO.class), HttpStatus.OK);
     }
 
+
     @PutMapping(path = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Integer> updateUser(@PathVariable Long id,
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id,
                                               @RequestParam("username") String userName,
-                                              @RequestParam("password") String password) {
+                                              @RequestParam("password") String password) throws UserNotFoundException {
         User newUserData = new User(userName, password);
-        Integer updatedUser = userService.update(id, newUserData);
-        return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
+        User updatedUser = userService.update(id, newUserData);
+        return new ResponseEntity<>(modelMapper.map(updatedUser, UserDTO.class), HttpStatus.ACCEPTED);
     }
+
 
     @DeleteMapping(path = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> deleteUser(@PathVariable Long id) throws UserNotFoundException {

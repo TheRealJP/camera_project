@@ -6,6 +6,7 @@ import be.kdg.processor.proxy.models.LicensePlate;
 import be.kdg.processor.proxy.models.Segment;
 import lombok.Data;
 
+import javax.persistence.Entity;
 import java.util.Objects;
 
 @Data

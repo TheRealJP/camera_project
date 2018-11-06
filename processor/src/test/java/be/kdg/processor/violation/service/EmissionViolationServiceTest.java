@@ -1,4 +1,4 @@
-package be.kdg.processor.service.violationservice;
+package be.kdg.processor.violation.service;
 
 import be.kdg.processor.cameramessage.models.CameraMessage;
 import be.kdg.processor.proxy.models.Camera;
@@ -62,16 +62,8 @@ public class EmissionViolationServiceTest {
         given(proxyService.collectCamera(any(Integer.class))).willReturn(camera);
         given(proxyService.collectLicensePlate(any(String.class))).willReturn(licensePlate);
 
-//        Violation v = emissionViolationService.checkViolation();
-//        assertThat(v, Matchers.instanceOf(EmissionViolation.class));
-
         verify(proxyService, times(1)).collectCamera(1);
         verify(proxyService, times(1)).collectLicensePlate("1-GOD-888");
-//        Violation violation = emissionViolationService.checkViolation(messages.get(0), messages);
-//        assertNotNull(violation);
-//        EmissionViolation emissionViolation = new EmissionViolation(camera, );
-//        given(emissionViolationService.checkViolation(messages.get(0), messages)).willReturn();
 
-//        assertThat(fine, Matchers.notNullValue(Fine.class));
     }
 }

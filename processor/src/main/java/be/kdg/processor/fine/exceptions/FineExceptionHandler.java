@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class FineExceptionHandler extends ResponseEntityExceptionHandler {
-    @ExceptionHandler
+    @ExceptionHandler(FineException.class)
     protected ResponseEntity<?> handleFineNotFound(RuntimeException ex, WebRequest wr) {
         return handleExceptionInternal(ex, "fine not found", new HttpHeaders(), HttpStatus.NOT_FOUND, wr);
     }
