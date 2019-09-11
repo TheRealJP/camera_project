@@ -1,5 +1,4 @@
 # Camera Project
-started on 21 sept 18
 
 ## About
 Spring boot Java project for school. 
